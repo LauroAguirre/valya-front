@@ -37,15 +37,15 @@ export default function AdminDashboardPage() {
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={adminChartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.22 0 0)" />
-                <XAxis dataKey="month" tick={{ fill: "oklch(0.6 0 0)", fontSize: 12 }} />
-                <YAxis tick={{ fill: "oklch(0.6 0 0)", fontSize: 12 }} tickFormatter={(v) => `R$${(v / 1000).toFixed(0)}k`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="month" tick={{ fill: "#737373", fontSize: 12 }} />
+                <YAxis tick={{ fill: "#737373", fontSize: 12 }} tickFormatter={(v) => `R$${(v / 1000).toFixed(0)}k`} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "oklch(0.13 0 0)",
-                    border: "1px solid oklch(0.22 0 0)",
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #e5e5e5",
                     borderRadius: "8px",
-                    color: "oklch(0.95 0 0)",
+                    color: "#0a0a0a",
                   }}
                   formatter={(value: number) =>
                     new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(value)
@@ -54,9 +54,9 @@ export default function AdminDashboardPage() {
                 <Line
                   type="monotone"
                   dataKey="faturamento"
-                  stroke="oklch(0.7 0.15 165)"
+                  stroke="#10b981"
                   strokeWidth={2}
-                  dot={{ fill: "oklch(0.7 0.15 165)", r: 4 }}
+                  dot={{ fill: "#10b981", r: 4 }}
                   name="Faturamento"
                 />
               </LineChart>
@@ -71,20 +71,20 @@ export default function AdminDashboardPage() {
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={adminChartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.22 0 0)" />
-                <XAxis dataKey="month" tick={{ fill: "oklch(0.6 0 0)", fontSize: 12 }} />
-                <YAxis tick={{ fill: "oklch(0.6 0 0)", fontSize: 12 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <XAxis dataKey="month" tick={{ fill: "#737373", fontSize: 12 }} />
+                <YAxis tick={{ fill: "#737373", fontSize: 12 }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "oklch(0.13 0 0)",
-                    border: "1px solid oklch(0.22 0 0)",
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #e5e5e5",
                     borderRadius: "8px",
-                    color: "oklch(0.95 0 0)",
+                    color: "#0a0a0a",
                   }}
                 />
                 <Bar
                   dataKey="leads"
-                  fill="oklch(0.6 0.1 180)"
+                  fill="#06b6d4"
                   radius={[4, 4, 0, 0]}
                   name="Novos Clientes"
                 />

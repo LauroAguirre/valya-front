@@ -4,12 +4,13 @@ export interface Lead {
   email: string
   phone: string
   source: string
-  status: "novo" | "qualificado" | "em_cadencia" | "visita" | "proposta" | "contrato" | "ganho" | "perda"
+  status: "qualificacao" | "cadencia" | "visita" | "proposta" | "contrato" | "ganho" | "perda"
   propertyId?: string
   propertyTitle?: string
   createdAt: string
   lastInteraction: string
   notes?: string
+  aiEnabled: boolean
 }
 
 export interface Property {
@@ -24,24 +25,34 @@ export interface Property {
   bedrooms: number
   bathrooms: number
   parkingSpaces: number
+  parkingType: "coberta" | "descoberta" | "mista"
+  bbqType: "nenhuma" | "carvao" | "eletrica"
   area: number
+  privateArea?: number
   salePrice?: number
   rentPrice?: number
   isMultiUnit: boolean
   units?: PropertyUnit[]
+  financialNotes?: string
+  paymentOptions?: string
   status: "ativo" | "inativo" | "vendido" | "alugado"
   images: PropertyImage[]
   announcements: Announcement[]
+  adLinks: AdLink[]
   createdAt: string
 }
 
 export interface PropertyUnit {
   id: string
   name: string
-  area: number
   bedrooms: number
-  salePrice?: number
-  rentPrice?: number
+  parkingSpaces: number
+  privateArea: number
+  parkingArea: number
+  totalArea: number
+  downPayment?: number
+  annualBonus?: number
+  installmentValue?: number
   status: "disponivel" | "reservado" | "vendido"
 }
 
@@ -57,6 +68,13 @@ export interface Announcement {
   url: string
   status: "ativo" | "pausado" | "expirado"
   publishedAt: string
+}
+
+export interface AdLink {
+  id: string
+  platform: "facebook" | "instagram" | "tiktok"
+  campaignName: string
+  url: string
 }
 
 export interface KanbanColumn {

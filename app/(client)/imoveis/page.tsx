@@ -30,10 +30,10 @@ export default function ImoveisPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Imoveis</h1>
+          <h1 className="text-2xl font-bold text-foreground">Imoveis / Empreendimentos</h1>
           <p className="text-sm text-muted-foreground">{mockProperties.length} imoveis cadastrados</p>
         </div>
-        <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+        <Button asChild>
           <Link href="/imoveis/novo">
             <Plus className="mr-2 h-4 w-4" />
             Novo Imovel
@@ -44,7 +44,7 @@ export default function ImoveisPage() {
       <div className="relative">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
-          placeholder="Buscar por titulo, bairro ou cidade..."
+          placeholder="Buscar por nome, bairro ou cidade..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="bg-secondary pl-10"
@@ -55,8 +55,8 @@ export default function ImoveisPage() {
         <Table>
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
-              <TableHead className="text-muted-foreground">Imovel</TableHead>
-              <TableHead className="text-muted-foreground">Tipo</TableHead>
+              <TableHead className="text-muted-foreground">Empreendimento</TableHead>
+              <TableHead className="text-muted-foreground">Dorms</TableHead>
               <TableHead className="text-muted-foreground">Localizacao</TableHead>
               <TableHead className="text-right text-muted-foreground">Preco</TableHead>
               <TableHead className="text-muted-foreground">Status</TableHead>
@@ -69,8 +69,11 @@ export default function ImoveisPage() {
                   <Link href={`/imoveis/${property.id}`} className="font-medium text-foreground hover:text-primary">
                     {property.title}
                   </Link>
+                  {property.isMultiUnit && (
+                    <Badge variant="secondary" className="ml-2 text-[10px]">Multiplas unid.</Badge>
+                  )}
                 </TableCell>
-                <TableCell className="capitalize text-muted-foreground">{property.type}</TableCell>
+                <TableCell className="text-muted-foreground">{property.bedrooms || "-"}</TableCell>
                 <TableCell className="text-muted-foreground">
                   {property.neighborhood}, {property.city}
                 </TableCell>
@@ -79,7 +82,7 @@ export default function ImoveisPage() {
                     ? formatCurrency(property.salePrice)
                     : property.rentPrice
                       ? `${formatCurrency(property.rentPrice)}/mes`
-                      : "Multiplas"}
+                      : "Consultar"}
                 </TableCell>
                 <TableCell>
                   <Badge variant={statusMap[property.status]?.variant ?? "secondary"}>

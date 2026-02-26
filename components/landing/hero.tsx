@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 export function Hero() {
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden px-6 pt-20">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,oklch(0.2_0.05_165)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#064e3b_0%,transparent_60%)]" />
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5 text-xs text-muted-foreground">
