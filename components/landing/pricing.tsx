@@ -14,7 +14,7 @@ export function Pricing() {
             Planos para cada momento
           </h2>
           <p className="mt-4 text-pretty text-muted-foreground">
-            Comece com o trial gratuito e escolha o plano ideal para o seu negocio.
+            Comece com o trial gratuito e escolha o plano ideal para o seu negócio.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export function Pricing() {
                   )}
                   asChild
                 >
-                  <Link href="/registro">Comecar agora</Link>
+                  <Link href="/registro">Começar agora</Link>
                 </Button>
               </CardFooter>
             </Card>

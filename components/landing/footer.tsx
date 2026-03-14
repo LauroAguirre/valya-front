@@ -9,7 +9,7 @@ export function Footer() {
             Valya
           </Link>
           <p className="mt-1 text-sm text-muted-foreground">
-            Automacao inteligente para corretores de imoveis.
+            Automação inteligente para corretores de imóveis.
           </p>
         </div>
 

@@ -32,7 +32,7 @@ export function LandingHeader() {
             <Link href="/login">Entrar</Link>
           </Button>
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-            <Link href="/registro">Comecar agora</Link>
+            <Link href="/registro">Começar agora</Link>
           </Button>
         </div>
 
@@ -62,7 +62,7 @@ export function LandingHeader() {
                 <Link href="/login">Entrar</Link>
               </Button>
               <Button size="sm" className="bg-primary text-primary-foreground" asChild>
-                <Link href="/registro">Comecar agora</Link>
+                <Link href="/registro">Começar agora</Link>
               </Button>
             </div>
           </nav>

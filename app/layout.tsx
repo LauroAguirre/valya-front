@@ -1,14 +1,23 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Open_Sans, Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const openSans = Open_Sans({ 
+  subsets: ["latin"],
+  variable: '--font-open-sans',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({ 
+  subsets: ["latin"],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Valya - Automacao Inteligente para Corretores',
-  description: 'Plataforma SaaS de IA para automacao de vendas imobiliarias. Qualifique leads, gerencie imoveis e feche negocios mais rapido.',
+  title: 'Valya - Automação Inteligente para Corretores',
+  description: 'Plataforma SaaS de IA para automação de vendas imobiliárias. Qualifique leads, gerencie imóveis e feche negócios mais rápido.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -35,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${openSans.variable} ${montserrat.variable}`}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />
