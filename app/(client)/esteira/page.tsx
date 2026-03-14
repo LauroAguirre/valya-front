@@ -73,7 +73,7 @@ export default function EsteiraPage() {
                     )}
                     <p className="mt-2 flex items-center gap-1 text-[10px] text-muted-foreground">
                       <Calendar className="h-3 w-3" />
-                      Ultima resposta: {lead.lastInteraction}
+                      Última resposta: {lead.lastInteraction}
                     </p>
                   </Card>
                 ))}
@@ -123,7 +123,7 @@ export default function EsteiraPage() {
                       <p className="text-sm text-foreground">
                         {selectedLead.source.includes("Instagram") || selectedLead.source.includes("Google") || selectedLead.source.includes("Portal")
                           ? selectedLead.source
-                          : selectedLead.source || "Nao identificada"}
+                          : selectedLead.source || "Não identificada"}
                       </p>
                     </div>
 
@@ -146,7 +146,7 @@ export default function EsteiraPage() {
 
                   {selectedLead.propertyTitle && (
                     <div className="rounded-lg border border-border p-4">
-                      <Label className="text-xs text-muted-foreground">Empreendimento em negociacao</Label>
+                      <Label className="text-xs text-muted-foreground">Empreendimento em negociação</Label>
                       <p className="mt-1 flex items-center gap-2 text-sm text-foreground">
                         <Building2 className="h-4 w-4 text-muted-foreground" />
                         {selectedLead.propertyTitle}
@@ -183,7 +183,7 @@ export default function EsteiraPage() {
                           >
                             <div className="mb-1 flex items-center gap-1">
                               <span className="text-[10px] font-semibold opacity-70">
-                                {msg.sender === "lead" ? "Lead" : msg.sender === "ai" ? "IA Valya" : "Voce"}
+                                {msg.sender === "lead" ? "Lead" : msg.sender === "ai" ? "IA Valya" : "Você"}
                               </span>
                             </div>
                             <p>{msg.content}</p>

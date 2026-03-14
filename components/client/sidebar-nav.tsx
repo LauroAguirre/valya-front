@@ -27,9 +27,9 @@ import { currentUser } from "@/lib/mock-data"
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/imoveis", label: "Imoveis", icon: Building2 },
+  { href: "/imoveis", label: "Imóveis", icon: Building2 },
   { href: "/esteira", label: "Esteira de Vendas", icon: Kanban },
-  { href: "/configuracao-ia", label: "Configuracao IA", icon: Bot },
+  { href: "/configuracao-ia", label: "Configuração IA", icon: Bot },
   { href: "/perfil", label: "Perfil", icon: User },
 ]
 

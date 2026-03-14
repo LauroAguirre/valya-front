@@ -27,7 +27,7 @@ import { Badge } from "@/components/ui/badge"
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/clientes", label: "Clientes", icon: Building },
-  { href: "/admin/usuarios", label: "Usuarios", icon: Users },
+  { href: "/admin/usuarios", label: "Usuários", icon: Users },
 ]
 
 export function AdminSidebar() {

@@ -1,14 +1,23 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Lato, Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const _lato = Lato({ 
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-sans"
+});
+
+const _montserrat = Montserrat({ 
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-heading"
+});
 
 export const metadata: Metadata = {
-  title: 'Valya - Automacao Inteligente para Corretores',
-  description: 'Plataforma SaaS de IA para automacao de vendas imobiliarias. Qualifique leads, gerencie imoveis e feche negocios mais rapido.',
+  title: 'Valya - Automação Inteligente para Corretores',
+  description: 'Plataforma SaaS de IA para automação de vendas imobiliárias. Qualifique leads, gerencie imóveis e feche negócios mais rápido.',
   generator: 'v0.app',
   icons: {
     icon: [

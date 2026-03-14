@@ -14,12 +14,12 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">Visao geral do seu desempenho</p>
+          <p className="text-sm text-muted-foreground">Visão geral do seu desempenho</p>
         </div>
         <Button asChild>
           <Link href="/configuracao-ia">
             <Bot className="mr-2 h-4 w-4" />
-            Configuracao da IA
+            Configuração da IA
           </Link>
         </Button>
       </div>
@@ -49,8 +49,8 @@ export default function DashboardPage() {
                 }}
               />
               <Legend wrapperStyle={{ color: "#737373", fontSize: 12 }} />
-              <Bar dataKey="leads" fill="#10b981" radius={[4, 4, 0, 0]} name="Novos Leads" />
-              <Bar dataKey="fechados" fill="#0a0a0a" radius={[4, 4, 0, 0]} name="Negocios Fechados" />
+              <Bar dataKey="leads" fill="#FF6600" radius={[4, 4, 0, 0]} name="Novos Leads" />
+              <Bar dataKey="fechados" fill="#003366" radius={[4, 4, 0, 0]} name="Negócios Fechados" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>

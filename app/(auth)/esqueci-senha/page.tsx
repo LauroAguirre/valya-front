@@ -52,8 +52,8 @@ export default function EsqueciSenhaPage() {
           {step === "password" && "Nova senha"}
         </CardTitle>
         <CardDescription>
-          {step === "email" && "Insira seu email para receber o codigo de verificacao"}
-          {step === "code" && `Enviamos um codigo de 6 digitos para ${email}`}
+          {step === "email" && "Insira seu e-mail para receber o código de verificação"}
+          {step === "code" && `Enviamos um código de 6 dígitos para ${email}`}
           {step === "password" && "Defina sua nova senha"}
         </CardDescription>
       </CardHeader>
@@ -77,7 +77,7 @@ export default function EsqueciSenhaPage() {
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
               disabled={loading}
             >
-              {loading ? "Enviando..." : "Enviar codigo"}
+              {loading ? "Enviando..." : "Enviar código"}
             </Button>
             <Link
               href="/login"
@@ -106,14 +106,14 @@ export default function EsqueciSenhaPage() {
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
               disabled={loading}
             >
-              {loading ? "Verificando..." : "Verificar codigo"}
+              {loading ? "Verificando..." : "Verificar código"}
             </Button>
             <button
               type="button"
               onClick={() => setStep("email")}
               className="text-sm text-muted-foreground hover:text-foreground"
             >
-              Reenviar codigo
+              Reenviar código
             </button>
           </form>
         )}

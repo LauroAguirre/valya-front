@@ -25,7 +25,7 @@ export default function RegistroPage() {
     <Card className="border-border bg-card">
       <CardHeader className="text-center">
         <CardTitle className="text-xl text-card-foreground">Criar sua conta</CardTitle>
-        <CardDescription>Preencha os dados para comecar</CardDescription>
+        <CardDescription>Preencha os dados para começar</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -82,7 +82,7 @@ export default function RegistroPage() {
       </CardContent>
       <CardFooter className="justify-center">
         <p className="text-sm text-muted-foreground">
-          Ja tem conta?{" "}
+          Já tem conta?{" "}
           <Link href="/login" className="text-primary hover:underline">
             Entrar
           </Link>

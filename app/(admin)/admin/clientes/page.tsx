@@ -57,11 +57,11 @@ export default function ClientesPage() {
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
               <TableHead className="text-muted-foreground">Cliente</TableHead>
-              <TableHead className="text-muted-foreground">Imobiliaria</TableHead>
+              <TableHead className="text-muted-foreground">Imobiliária</TableHead>
               <TableHead className="text-muted-foreground">Plano</TableHead>
               <TableHead className="text-muted-foreground">Status</TableHead>
               <TableHead className="text-right text-muted-foreground">Leads</TableHead>
-              <TableHead className="text-right text-muted-foreground">Imoveis</TableHead>
+              <TableHead className="text-right text-muted-foreground">Imóveis</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -130,7 +130,7 @@ export default function ClientesPage() {
                           <p className="text-sm text-foreground">{selectedClient.creci}</p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Imobiliaria</p>
+                          <p className="text-xs text-muted-foreground">Imobiliária</p>
                           <p className="text-sm text-foreground">{selectedClient.agency}</p>
                         </div>
                         <div>
@@ -145,7 +145,7 @@ export default function ClientesPage() {
                           <p className="text-lg font-bold text-foreground">{selectedClient.leadsCount}</p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Total de Imoveis</p>
+                          <p className="text-xs text-muted-foreground">Total de Imóveis</p>
                           <p className="text-lg font-bold text-foreground">{selectedClient.propertiesCount}</p>
                         </div>
                       </div>
@@ -163,7 +163,7 @@ export default function ClientesPage() {
                           <p className="text-sm font-medium text-foreground">Plano {selectedClient.plan.name}</p>
                           <p className="text-2xl font-bold text-foreground">
                             {formatCurrency(selectedClient.plan.price)}
-                            <span className="text-sm font-normal text-muted-foreground">/mes</span>
+                            <span className="text-sm font-normal text-muted-foreground">/mês</span>
                           </p>
                         </div>
                         <Badge variant={statusVariant[selectedClient.subscriptionStatus] ?? "secondary"}>
@@ -172,14 +172,14 @@ export default function ClientesPage() {
                       </div>
                       <div className="mt-3 flex items-center gap-4 text-sm text-muted-foreground">
                         <span>Expira em {selectedClient.daysToExpire} dias</span>
-                        <span>Cartao: {selectedClient.hasCard ? "Cadastrado" : "Nao cadastrado"}</span>
+                        <span>Cartão: {selectedClient.hasCard ? "Cadastrado" : "Não cadastrado"}</span>
                       </div>
                     </CardContent>
                   </Card>
 
                   <Card className="border-border bg-card">
                     <CardContent className="pt-6">
-                      <p className="mb-4 text-sm font-medium text-card-foreground">Historico de Pagamentos</p>
+                      <p className="mb-4 text-sm font-medium text-card-foreground">Histórico de Pagamentos</p>
                       {selectedClient.payments.length === 0 ? (
                         <p className="text-sm text-muted-foreground">Nenhum pagamento registrado.</p>
                       ) : (
@@ -188,7 +188,7 @@ export default function ClientesPage() {
                             <TableHeader>
                               <TableRow className="border-border">
                                 <TableHead className="text-muted-foreground">Data</TableHead>
-                                <TableHead className="text-muted-foreground">Metodo</TableHead>
+                                <TableHead className="text-muted-foreground">Método</TableHead>
                                 <TableHead className="text-right text-muted-foreground">Valor</TableHead>
                                 <TableHead className="text-muted-foreground">Status</TableHead>
                               </TableRow>

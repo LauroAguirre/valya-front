@@ -25,7 +25,7 @@ export default function PerfilPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-foreground">Meu Perfil</h1>
-        <p className="text-sm text-muted-foreground">Gerencie suas informacoes pessoais e comerciais</p>
+        <p className="text-sm text-muted-foreground">Gerencie suas informações pessoais e comerciais</p>
       </div>
 
       <form onSubmit={handleSave} className="grid gap-6 lg:grid-cols-3">
@@ -113,7 +113,7 @@ export default function PerfilPage() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Imobiliaria</Label>
+                  <Label>Imobiliária</Label>
                   <Input
                     value={user.agency ?? ""}
                     onChange={(e) => setUser({ ...user, agency: e.target.value })}
@@ -127,7 +127,7 @@ export default function PerfilPage() {
                     onChange={(e) => setUser({ ...user, bio: e.target.value })}
                     className="resize-none bg-secondary"
                     rows={4}
-                    placeholder="Conte um pouco sobre voce e sua experiencia..."
+                    placeholder="Conte um pouco sobre você e sua experiência..."
                   />
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function PerfilPage() {
 
           <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto sm:self-end">
             <Save className="mr-2 h-4 w-4" />
-            Salvar alteracoes
+            Salvar alterações
           </Button>
         </div>
       </form>

@@ -41,8 +41,8 @@ export default function UsuariosPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-foreground">Usuarios</h1>
-        <p className="text-sm text-muted-foreground">{users.length} usuarios cadastrados</p>
+        <h1 className="text-2xl font-bold text-foreground">Usuários</h1>
+        <p className="text-sm text-muted-foreground">{users.length} usuários cadastrados</p>
       </div>
 
       <div className="relative">
@@ -61,7 +61,7 @@ export default function UsuariosPage() {
             <TableRow className="border-border hover:bg-transparent">
               <TableHead className="text-muted-foreground">Nome</TableHead>
               <TableHead className="text-muted-foreground">Email</TableHead>
-              <TableHead className="text-muted-foreground">Funcao</TableHead>
+              <TableHead className="text-muted-foreground">Função</TableHead>
               <TableHead className="text-muted-foreground">Status</TableHead>
               <TableHead className="text-muted-foreground">Membro desde</TableHead>
               <TableHead className="text-right text-muted-foreground">Ativo</TableHead>

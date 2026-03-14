@@ -30,13 +30,13 @@ export default function ImoveisPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Imoveis / Empreendimentos</h1>
-          <p className="text-sm text-muted-foreground">{mockProperties.length} imoveis cadastrados</p>
+          <h1 className="text-2xl font-bold text-foreground">Imóveis / Empreendimentos</h1>
+          <p className="text-sm text-muted-foreground">{mockProperties.length} imóveis cadastrados</p>
         </div>
         <Button asChild>
           <Link href="/imoveis/novo">
             <Plus className="mr-2 h-4 w-4" />
-            Novo Imovel
+            Novo Imóvel
           </Link>
         </Button>
       </div>
@@ -57,8 +57,8 @@ export default function ImoveisPage() {
             <TableRow className="border-border hover:bg-transparent">
               <TableHead className="text-muted-foreground">Empreendimento</TableHead>
               <TableHead className="text-muted-foreground">Dorms</TableHead>
-              <TableHead className="text-muted-foreground">Localizacao</TableHead>
-              <TableHead className="text-right text-muted-foreground">Preco</TableHead>
+              <TableHead className="text-muted-foreground">Localização</TableHead>
+              <TableHead className="text-right text-muted-foreground">Preço</TableHead>
               <TableHead className="text-muted-foreground">Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -70,7 +70,7 @@ export default function ImoveisPage() {
                     {property.title}
                   </Link>
                   {property.isMultiUnit && (
-                    <Badge variant="secondary" className="ml-2 text-[10px]">Multiplas unid.</Badge>
+                    <Badge variant="secondary" className="ml-2 text-[10px]">Múltiplas unid.</Badge>
                   )}
                 </TableCell>
                 <TableCell className="text-muted-foreground">{property.bedrooms || "-"}</TableCell>
