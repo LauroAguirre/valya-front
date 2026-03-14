@@ -10,11 +10,11 @@ export function Pricing() {
     <section id="planos" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Planos para cada momento
           </h2>
           <p className="mt-4 text-pretty text-muted-foreground">
-            Comece com o trial gratuito e escolha o plano ideal para o seu negócio.
+            Comece com o trial gratuito e escolha o plano ideal para o seu negocio.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export function Pricing() {
                   )}
                   asChild
                 >
-                  <Link href="/registro">Começar agora</Link>
+                  <Link href="/registro">Comecar agora</Link>
                 </Button>
               </CardFooter>
             </Card>

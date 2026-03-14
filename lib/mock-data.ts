@@ -17,11 +17,11 @@ export const plans: Plan[] = [
     name: "Starter",
     price: 97,
     features: [
-      "Até 100 leads/mês",
-      "1 número WhatsApp",
-      "Cadência automática básica",
-      "Dashboard de métricas",
-      "Suporte por e-mail",
+      "Ate 100 leads/mes",
+      "1 numero WhatsApp",
+      "Cadencia automatica basica",
+      "Dashboard de metricas",
+      "Suporte por email",
     ],
   },
   {
@@ -30,12 +30,12 @@ export const plans: Plan[] = [
     price: 197,
     isPopular: true,
     features: [
-      "Até 500 leads/mês",
-      "3 números WhatsApp",
-      "Cadência avançada com IA",
-      "Qualificação automática",
-      "Integração com portais",
-      "Suporte prioritário",
+      "Ate 500 leads/mes",
+      "3 numeros WhatsApp",
+      "Cadencia avancada com IA",
+      "Qualificacao automatica",
+      "Integracao com portais",
+      "Suporte prioritario",
     ],
   },
   {
@@ -44,7 +44,7 @@ export const plans: Plan[] = [
     price: 397,
     features: [
       "Leads ilimitados",
-      "Números ilimitados",
+      "Numeros ilimitados",
       "IA personalizada",
       "API completa",
       "Gestor de conta dedicado",
@@ -67,7 +67,7 @@ export const mockLeads: Lead[] = [
     propertyTitle: "Apartamento Jardins 120m2",
     createdAt: "2026-02-20",
     lastInteraction: "2026-02-24",
-    notes: "Interessada em visita no sábado",
+    notes: "Interessada em visita no sabado",
     aiEnabled: true,
   },
   {
@@ -160,7 +160,7 @@ export const mockLeads: Lead[] = [
     propertyTitle: "Apartamento Jardins 120m2",
     createdAt: "2026-01-15",
     lastInteraction: "2026-02-10",
-    notes: "Desistiu por questão de preço",
+    notes: "Desistiu por questao de preco",
     aiEnabled: false,
   },
   {
@@ -224,7 +224,7 @@ export const mockProperties: Property[] = [
     title: "Apartamento Jardins 120m2",
     type: "apartamento",
     description:
-      "Lindo apartamento reformado no coração dos Jardins. 3 suítes, varanda gourmet, 2 vagas de garagem. Lazer completo no condomínio.",
+      "Lindo apartamento reformado no coracao dos Jardins. 3 suites, varanda gourmet, 2 vagas de garagem. Lazer completo no condominio.",
     address: "Rua Oscar Freire, 1200",
     city: "Sao Paulo",
     state: "SP",
@@ -238,8 +238,8 @@ export const mockProperties: Property[] = [
     privateArea: 105,
     salePrice: 1850000,
     isMultiUnit: false,
-    financialNotes: "Aceita financiamento bancário. FGTS permitido.",
-    paymentOptions: "Entrada + financiamento ou à vista com desconto de 5%",
+    financialNotes: "Aceita financiamento bancario. FGTS permitido.",
+    paymentOptions: "Entrada + financiamento ou a vista com desconto de 5%",
     status: "ativo",
     images: [
       { id: "img1", url: "/placeholder.svg", description: "Sala de estar ampla" },
@@ -261,7 +261,7 @@ export const mockProperties: Property[] = [
     title: "Casa Alphaville 350m2",
     type: "casa",
     description:
-      "Casa em condomínio fechado com 4 suítes, piscina, churrasqueira e campo de futebol. Segurança 24h.",
+      "Casa em condominio fechado com 4 suites, piscina, churrasqueira e campo de futebol. Seguranca 24h.",
     address: "Alameda das Palmeiras, 500",
     city: "Barueri",
     state: "SP",
@@ -293,7 +293,7 @@ export const mockProperties: Property[] = [
     title: "Cobertura Leblon 200m2",
     type: "cobertura",
     description:
-      "Cobertura duplex com vista para o mar. 3 suítes, terraço panorâmico, jacuzzi. A 2 quadras da praia.",
+      "Cobertura duplex com vista para o mar. 3 suites, terraco panoramico, jacuzzi. A 2 quadras da praia.",
     address: "Av. Delfim Moreira, 800",
     city: "Rio de Janeiro",
     state: "RJ",
@@ -322,7 +322,7 @@ export const mockProperties: Property[] = [
     title: "Sala Comercial Faria Lima",
     type: "comercial",
     description:
-      "Conjunto comercial com 80m², ar condicionado central, piso elevado, infraestrutura completa para escritório.",
+      "Conjunto comercial com 80m2, ar condicionado central, piso elevado, infraestrutura completa para escritorio.",
     address: "Av. Faria Lima, 3500",
     city: "Sao Paulo",
     state: "SP",
@@ -349,7 +349,7 @@ export const mockProperties: Property[] = [
     title: "Apartamento Barra 80m2",
     type: "apartamento",
     description:
-      "Apartamento 2 quartos com suíte, varanda, lazer completo. Próximo ao metrô e shopping.",
+      "Apartamento 2 quartos com suite, varanda, lazer completo. Proximo ao metro e shopping.",
     address: "Av. das Americas, 4200",
     city: "Rio de Janeiro",
     state: "RJ",
@@ -377,7 +377,7 @@ export const mockProperties: Property[] = [
     title: "Terreno Granja Viana 500m2",
     type: "terreno",
     description:
-      "Terreno plano em condomínio fechado com infraestrutura completa. Ótima topografia para construção.",
+      "Terreno plano em condominio fechado com infraestrutura completa. Otima topografia para construcao.",
     address: "Rua dos Ipes, 100",
     city: "Cotia",
     state: "SP",
@@ -401,7 +401,7 @@ export const mockProperties: Property[] = [
     title: "Residencial Flores do Campo",
     type: "apartamento",
     description:
-      "Empreendimento com 48 unidades, apartamentos de 2 e 3 dormitórios. Lazer completo, próximo ao metrô.",
+      "Empreendimento com 48 unidades, apartamentos de 2 e 3 dormitorios. Lazer completo, proximo ao metro.",
     address: "Rua das Flores, 300",
     city: "Sao Paulo",
     state: "SP",
@@ -420,7 +420,7 @@ export const mockProperties: Property[] = [
       { id: "u4", name: "Unid 202", bedrooms: 3, parkingSpaces: 2, privateArea: 72, parkingArea: 24, totalArea: 96, downPayment: 62000, annualBonus: 15000, installmentValue: 2400, status: "vendido" },
       { id: "u5", name: "Unid 301", bedrooms: 2, parkingSpaces: 1, privateArea: 55, parkingArea: 12, totalArea: 67, downPayment: 49500, annualBonus: 12000, installmentValue: 1850, status: "disponivel" },
     ],
-    financialNotes: "Aceita financiamento Caixa e Banco do Brasil. Programa MCMV disponível para unidades de 2 dorms.",
+    financialNotes: "Aceita financiamento Caixa e Banco do Brasil. Programa MCMV disponivel para unidades de 2 dorms.",
     paymentOptions: "Entrada parcelada em ate 36x, saldo financiado em 420 meses",
     status: "ativo",
     images: [
@@ -441,56 +441,56 @@ export const mockProperties: Property[] = [
 export const mockKanbanColumns: KanbanColumn[] = [
   {
     id: "qualificacao",
-    title: "Qualificação",
-    color: "bg-[#1A4D8C]",
+    title: "Qualificacao",
+    color: "bg-[#6366f1]",
     cards: mockLeads.filter((l) => l.status === "qualificacao"),
   },
   {
     id: "cadencia",
-    title: "Cadência & Alimentação",
-    color: "bg-[#FF8C00]",
+    title: "Cadencia & Alimentacao",
+    color: "bg-[#f59e0b]",
     cards: mockLeads.filter((l) => l.status === "cadencia"),
   },
   {
     id: "visita",
     title: "Visita",
-    color: "bg-[#003366]",
+    color: "bg-[#06b6d4]",
     cards: mockLeads.filter((l) => l.status === "visita"),
   },
   {
     id: "proposta",
     title: "Proposta",
-    color: "bg-[#FF6600]",
+    color: "bg-[#10b981]",
     cards: mockLeads.filter((l) => l.status === "proposta"),
   },
   {
     id: "contrato",
     title: "Contrato",
-    color: "bg-[#1A4D8C]",
+    color: "bg-[#8b5cf6]",
     cards: mockLeads.filter((l) => l.status === "contrato"),
   },
   {
     id: "resultado",
     title: "Ganho / Perda",
-    color: "bg-[#5a7a99]",
+    color: "bg-[#737373]",
     cards: mockLeads.filter((l) => l.status === "ganho" || l.status === "perda"),
   },
 ]
 
 // ---- Chat Messages ----
 export const mockChatMessages: ChatMessage[] = [
-  { id: "c1", sender: "lead", content: "Olá, vi o anúncio do apartamento nos Jardins e tenho interesse.", timestamp: "2026-02-24 09:00" },
-  { id: "c2", sender: "ai", content: "Olá Ana! Que bom saber do seu interesse. O apartamento tem 120m², 3 suítes e fica na Oscar Freire. Gostaria de agendar uma visita?", timestamp: "2026-02-24 09:01" },
-  { id: "c3", sender: "lead", content: "Sim! Pode ser sábado de manhã?", timestamp: "2026-02-24 09:05" },
-  { id: "c4", sender: "ai", content: "Perfeito! Tenho horário às 10h ou 11h no sábado. Qual prefere?", timestamp: "2026-02-24 09:06" },
-  { id: "c5", sender: "lead", content: "10h está ótimo!", timestamp: "2026-02-24 09:10" },
-  { id: "c6", sender: "agent", content: "Ana, confirmo sua visita para sábado às 10h. Vou te enviar o endereço completo por WhatsApp. Até lá!", timestamp: "2026-02-24 09:15" },
+  { id: "c1", sender: "lead", content: "Ola, vi o anuncio do apartamento nos Jardins e tenho interesse.", timestamp: "2026-02-24 09:00" },
+  { id: "c2", sender: "ai", content: "Ola Ana! Que bom saber do seu interesse. O apartamento tem 120m2, 3 suites e fica na Oscar Freire. Gostaria de agendar uma visita?", timestamp: "2026-02-24 09:01" },
+  { id: "c3", sender: "lead", content: "Sim! Pode ser sabado de manha?", timestamp: "2026-02-24 09:05" },
+  { id: "c4", sender: "ai", content: "Perfeito! Tenho horario as 10h ou 11h no sabado. Qual prefere?", timestamp: "2026-02-24 09:06" },
+  { id: "c5", sender: "lead", content: "10h esta otimo!", timestamp: "2026-02-24 09:10" },
+  { id: "c6", sender: "agent", content: "Ana, confirmo sua visita para sabado as 10h. Vou te enviar o endereco completo por WhatsApp. Ate la!", timestamp: "2026-02-24 09:15" },
 ]
 
 // ---- Client Dashboard KPIs ----
 export const clientKpis: KpiData[] = [
-  { label: "Negociação Ativa", value: 8, change: 12, changeLabel: "vs mês anterior" },
-  { label: "Cadência / Follow-up", value: 4, change: -3, changeLabel: "vs mês anterior" },
+  { label: "Negociacao Ativa", value: 8, change: 12, changeLabel: "vs mes anterior" },
+  { label: "Cadencia / Follow-up", value: 4, change: -3, changeLabel: "vs mes anterior" },
 ]
 
 // ---- Client Chart Data ----
@@ -505,10 +505,10 @@ export const clientChartData: ChartDataPoint[] = [
 
 // ---- Admin KPIs ----
 export const adminKpis: KpiData[] = [
-  { label: "Clientes Ativos", value: 142, change: 8, changeLabel: "vs mês anterior" },
-  { label: "Churn Rate", value: "3.2%", change: -0.5, changeLabel: "vs mês anterior" },
+  { label: "Clientes Ativos", value: 142, change: 8, changeLabel: "vs mes anterior" },
+  { label: "Churn Rate", value: "3.2%", change: -0.5, changeLabel: "vs mes anterior" },
   { label: "Em Trial", value: 23, change: 12, changeLabel: "novos esta semana" },
-  { label: "MRR", value: "R$ 28.4k", change: 15, changeLabel: "vs mês anterior" },
+  { label: "MRR", value: "R$ 28.4k", change: 15, changeLabel: "vs mes anterior" },
 ]
 
 // ---- Admin Chart Data ----
@@ -524,11 +524,11 @@ export const adminChartData: ChartDataPoint[] = [
 // ---- Users ----
 export const mockUsers: User[] = [
   { id: "u1", name: "Carlos Henrique", email: "carlos@valya.app", phone: "(11) 99999-0001", role: "admin", isActive: true, createdAt: "2025-06-01" },
-  { id: "u2", name: "Maria Souza", email: "maria.s@email.com", phone: "(11) 99999-0002", role: "client", creci: "123456-F", agency: "Imobiliária Souza", isActive: true, createdAt: "2025-08-15" },
-  { id: "u3", name: "José Pereira", email: "jose.p@email.com", phone: "(21) 99999-0003", role: "client", creci: "789012-F", agency: "JP Imóveis", isActive: true, createdAt: "2025-09-20" },
+  { id: "u2", name: "Maria Souza", email: "maria.s@email.com", phone: "(11) 99999-0002", role: "client", creci: "123456-F", agency: "Imobiliaria Souza", isActive: true, createdAt: "2025-08-15" },
+  { id: "u3", name: "Jose Pereira", email: "jose.p@email.com", phone: "(21) 99999-0003", role: "client", creci: "789012-F", agency: "JP Imoveis", isActive: true, createdAt: "2025-09-20" },
   { id: "u4", name: "Ana Beatriz", email: "ana.b@email.com", phone: "(31) 99999-0004", role: "client", creci: "345678-F", agency: "AB Corretora", isActive: false, createdAt: "2025-10-10" },
-  { id: "u5", name: "Roberto Dias", email: "roberto.d@email.com", phone: "(41) 99999-0005", role: "client", creci: "901234-F", agency: "Dias Imóveis", isActive: true, createdAt: "2025-11-01" },
-  { id: "u6", name: "Letícia Alves", email: "leticia@valya.app", phone: "(11) 99999-0006", role: "admin", isActive: true, createdAt: "2025-07-01" },
+  { id: "u5", name: "Roberto Dias", email: "roberto.d@email.com", phone: "(41) 99999-0005", role: "client", creci: "901234-F", agency: "Dias Imoveis", isActive: true, createdAt: "2025-11-01" },
+  { id: "u6", name: "Leticia Alves", email: "leticia@valya.app", phone: "(11) 99999-0006", role: "admin", isActive: true, createdAt: "2025-07-01" },
 ]
 
 // ---- Clients (Admin view) ----
@@ -539,7 +539,7 @@ export const mockClients: Client[] = [
     email: "maria.s@email.com",
     phone: "(11) 99999-0002",
     creci: "123456-F",
-    agency: "Imobiliária Souza",
+    agency: "Imobiliaria Souza",
     plan: plans[1],
     subscriptionStatus: "ativo",
     daysToExpire: 22,
@@ -555,11 +555,11 @@ export const mockClients: Client[] = [
   },
   {
     id: "cl2",
-    name: "José Pereira",
+    name: "Jose Pereira",
     email: "jose.p@email.com",
     phone: "(21) 99999-0003",
     creci: "789012-F",
-    agency: "JP Imóveis",
+    agency: "JP Imoveis",
     plan: plans[0],
     subscriptionStatus: "trial",
     daysToExpire: 5,
@@ -594,7 +594,7 @@ export const mockClients: Client[] = [
     email: "roberto.d@email.com",
     phone: "(41) 99999-0005",
     creci: "901234-F",
-    agency: "Dias Imóveis",
+    agency: "Dias Imoveis",
     plan: plans[1],
     subscriptionStatus: "ativo",
     daysToExpire: 18,
@@ -613,7 +613,7 @@ export const mockClients: Client[] = [
     email: "fer.torres@email.com",
     phone: "(51) 99999-0007",
     creci: "567890-F",
-    agency: "Torres Imóveis",
+    agency: "Torres Imoveis",
     plan: plans[0],
     subscriptionStatus: "ativo",
     daysToExpire: 30,

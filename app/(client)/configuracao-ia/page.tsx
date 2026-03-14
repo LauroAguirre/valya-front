@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/sonner"
 
 export default function ConfiguracaoIAPage() {
   const [prompt, setPrompt] = useState(
-    "Você é um assistente de vendas imobiliárias. Seja educado, objetivo e sempre ofereça agendar uma visita. Quando o lead demonstrar interesse, colete nome completo, e-mail e telefone."
+    "Voce e um assistente de vendas imobiliarias. Seja educado, objetivo e sempre ofereca agendar uma visita. Quando o lead demonstrar interesse, colete nome completo, email e telefone."
   )
 
   function handleSave() {
@@ -21,7 +21,7 @@ export default function ConfiguracaoIAPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-foreground">Configuração da IA</h1>
+        <h1 className="text-2xl font-bold text-foreground">Configuracao da IA</h1>
         <p className="text-sm text-muted-foreground">Conecte seu WhatsApp e personalize o comportamento da IA</p>
       </div>
 
@@ -30,7 +30,7 @@ export default function ConfiguracaoIAPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base text-card-foreground">
               <QrCode className="h-5 w-5 text-primary" />
-              Conexão WhatsApp
+              Conexao WhatsApp
             </CardTitle>
             <CardDescription>Escaneie o QR Code abaixo com seu WhatsApp para conectar</CardDescription>
           </CardHeader>
@@ -53,11 +53,11 @@ export default function ConfiguracaoIAPage() {
               Abra o WhatsApp no seu celular, va em Dispositivos conectados e escaneie o codigo acima.
             </p>
 
-            <Alert variant="destructive" className="border-[#FF8C00]/30 bg-[#FF8C00]/5 text-foreground [&>svg]:text-[#FF8C00]">
+            <Alert variant="destructive" className="border-[#f59e0b]/30 bg-[#f59e0b]/5 text-foreground [&>svg]:text-[#f59e0b]">
               <AlertTriangle className="h-4 w-4" />
-              <AlertTitle className="text-sm font-semibold">Atenção: Use seu telefone comercial</AlertTitle>
+              <AlertTitle className="text-sm font-semibold">Atencao: Use seu telefone comercial</AlertTitle>
               <AlertDescription className="text-xs text-muted-foreground">
-                A IA irá acompanhar <strong className="text-foreground">todo o tráfego de mensagens</strong> da conta conectada. Recomendamos fortemente que você utilize um número de telefone exclusivo para uso comercial, e não o seu número pessoal.
+                A IA ira acompanhar <strong className="text-foreground">todo o trafego de mensagens</strong> da conta conectada. Recomendamos fortemente que voce utilize um numero de telefone exclusivo para uso comercial, e nao o seu numero pessoal.
               </AlertDescription>
             </Alert>
           </CardContent>
@@ -76,7 +76,7 @@ export default function ConfiguracaoIAPage() {
               onChange={(e) => setPrompt(e.target.value)}
               rows={12}
               className="resize-y bg-secondary text-sm"
-              placeholder="Descreva como a IA deve se comportar, o tom de voz, regras de atendimento, informações que deve coletar..."
+              placeholder="Descreva como a IA deve se comportar, o tom de voz, regras de atendimento, informacoes que deve coletar..."
             />
             <p className="text-xs text-muted-foreground">
               Sem limite de caracteres. Quanto mais detalhado, melhor sera o atendimento da IA.

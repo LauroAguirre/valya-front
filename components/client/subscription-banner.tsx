@@ -24,7 +24,7 @@ export function SubscriptionBanner({ daysToExpire, hasCard }: SubscriptionBanner
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-4 w-4 shrink-0" />
           <p className="text-sm font-medium">
-            Sua assinatura expira em {daysToExpire} dias. Cadastre um cartão para continuar usando.
+            Sua assinatura expira em {daysToExpire} dias. Cadastre um cartao para continuar usando.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -35,7 +35,7 @@ export function SubscriptionBanner({ daysToExpire, hasCard }: SubscriptionBanner
             onClick={() => setSheetOpen(true)}
           >
             <CreditCard className="mr-1.5 h-3 w-3" />
-            Cadastrar cartão
+            Cadastrar cartao
           </Button>
           <button onClick={() => setDismissed(true)} className="hover:opacity-70">
             <X className="h-4 w-4" />
@@ -46,16 +46,16 @@ export function SubscriptionBanner({ daysToExpire, hasCard }: SubscriptionBanner
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetContent className="bg-card">
           <SheetHeader>
-            <SheetTitle className="text-card-foreground">Cadastrar cartão de crédito</SheetTitle>
-            <SheetDescription>Adicione seu cartão para renovar sua assinatura automaticamente.</SheetDescription>
+            <SheetTitle className="text-card-foreground">Cadastrar cartao de credito</SheetTitle>
+            <SheetDescription>Adicione seu cartao para renovar sua assinatura automaticamente.</SheetDescription>
           </SheetHeader>
           <div className="mt-6 flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Label>Nome no cartão</Label>
-              <Input placeholder="Nome como está no cartão" className="bg-secondary" />
+              <Label>Nome no cartao</Label>
+              <Input placeholder="Nome como esta no cartao" className="bg-secondary" />
             </div>
             <div className="flex flex-col gap-2">
-              <Label>Número do cartão</Label>
+              <Label>Numero do cartao</Label>
               <Input placeholder="0000 0000 0000 0000" className="bg-secondary" />
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -69,7 +69,7 @@ export function SubscriptionBanner({ daysToExpire, hasCard }: SubscriptionBanner
               </div>
             </div>
             <Button className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90">
-              Salvar cartão
+              Salvar cartao
             </Button>
           </div>
         </SheetContent>

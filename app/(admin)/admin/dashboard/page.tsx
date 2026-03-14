@@ -20,7 +20,7 @@ export default function AdminDashboardPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-foreground">Dashboard Admin</h1>
-        <p className="text-sm text-muted-foreground">Visão geral da plataforma Valya</p>
+        <p className="text-sm text-muted-foreground">Visao geral da plataforma Valya</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,9 +54,9 @@ export default function AdminDashboardPage() {
                 <Line
                   type="monotone"
                   dataKey="faturamento"
-                  stroke="#FF6600"
+                  stroke="#10b981"
                   strokeWidth={2}
-                  dot={{ fill: "#FF6600", r: 4 }}
+                  dot={{ fill: "#10b981", r: 4 }}
                   name="Faturamento"
                 />
               </LineChart>
@@ -84,7 +84,7 @@ export default function AdminDashboardPage() {
                 />
                 <Bar
                   dataKey="leads"
-                  fill="#003366"
+                  fill="#06b6d4"
                   radius={[4, 4, 0, 0]}
                   name="Novos Clientes"
                 />

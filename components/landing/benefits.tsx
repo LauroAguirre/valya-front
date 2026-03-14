@@ -4,27 +4,27 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 const benefits = [
   {
     icon: Bot,
-    title: "Qualificação com IA",
+    title: "Qualificacao com IA",
     description:
-      "Nossa IA conversa com seus leads no WhatsApp, qualifica automaticamente e identifica os que estão prontos para comprar.",
+      "Nossa IA conversa com seus leads no WhatsApp, qualifica automaticamente e identifica os que estao prontos para comprar.",
   },
   {
     icon: Zap,
-    title: "Cadência Automática",
+    title: "Cadencia Automatica",
     description:
-      "Sequências de mensagens personalizadas que mantêm seus leads engajados até o momento ideal de contato.",
+      "Sequencias de mensagens personalizadas que mantem seus leads engajados ate o momento ideal de contato.",
   },
   {
     icon: MessageSquare,
     title: "WhatsApp Integrado",
     description:
-      "Conecte seu WhatsApp em minutos. A IA responde 24/7, agenda visitas e encaminha leads quentes para você.",
+      "Conecte seu WhatsApp em minutos. A IA responde 24/7, agenda visitas e encaminha leads quentes para voce.",
   },
   {
     icon: BarChart3,
     title: "Dashboard Inteligente",
     description:
-      "Acompanhe métricas de conversão, pipeline de vendas e performance da IA em tempo real.",
+      "Acompanhe metricas de conversao, pipeline de vendas e performance da IA em tempo real.",
   },
 ]
 
@@ -33,11 +33,11 @@ export function Benefits() {
     <section id="recursos" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Tudo que você precisa para vender mais
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            Tudo que voce precisa para vender mais
           </h2>
           <p className="mt-4 text-pretty text-muted-foreground">
-            Ferramentas poderosas que trabalham por você enquanto você foca no que importa: fechar negócios.
+            Ferramentas poderosas que trabalham por voce enquanto voce foca no que importa: fechar negocios.
           </p>
         </div>
 
