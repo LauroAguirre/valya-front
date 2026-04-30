@@ -31,6 +31,7 @@ export const leadSchema = z.object({
   origin: z.enum(LeadOrigin).default(LeadOrigin.WHATSAPP),
   stage: z.enum(LeadStage).default(LeadStage.QUALIFICATION),
   aiEnabled: z.boolean().default(true),
+  notes: z.string().nullish(),
   lastReplyAt: z.date().nullish(),
   createdAt: z.date().default(new Date()),
   updatedAt: z.date().nullish(),
@@ -39,7 +40,7 @@ export const leadSchema = z.object({
 export type LeadForm = z.infer<typeof leadSchema>
 
 export type Lead = LeadForm & {
-  user: User
-  messages: Message[]
-  properties: Property[]
+  user?: User
+  messages?: Message[]
+  properties?: Property[]
 }

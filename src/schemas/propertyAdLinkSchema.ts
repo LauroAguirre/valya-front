@@ -10,7 +10,6 @@ export const propertyAdLinkSchema = z.object({
   createdAt: z.date().default(new Date()),
 })
 
-
 export type PropertyAdLink = z.infer<typeof propertyAdLinkSchema> & {
-  property: Property,
+  property?: Property
 }

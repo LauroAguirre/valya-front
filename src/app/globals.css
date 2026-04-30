@@ -10,10 +10,11 @@
   --card-foreground: #003366;
   --popover: #ffffff;
   --popover-foreground: #003366;
-  --primary: #FF6600;
+  --primary: #586381;
   --primary-foreground: #ffffff;
   --secondary: #F5F5DC;
-  --secondary-foreground: #003366;
+  --secondary-foreground: #FF6600;
+  /* --secondary-foreground: #003366; */
   --muted: #F8F8F8;
   --muted-foreground: #5a6a7a;
   --accent: #F5F5DC;

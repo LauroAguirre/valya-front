@@ -33,5 +33,11 @@ export const messageSchema = z.object({
 })
 
 export type Message = z.infer<typeof messageSchema> & {
-  lead: Lead
+  lead?: Lead
 }
+
+export const sendMessageSchema = z.object({
+  content: z.string().min(1, 'Digite uma mensagem.'),
+})
+
+export type SendMessageForm = z.infer<typeof sendMessageSchema>

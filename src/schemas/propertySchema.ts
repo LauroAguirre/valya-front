@@ -49,11 +49,11 @@ export const propertySchema = z.object({
   createdAt: z.date().default(new Date()),
   updatedAt: z.date().nullish(),
   deletedAt: z.date().nullish(),
-  totalPrice: z.number().nullish(),
-  minDown: z.number().nullish(),
-  installments: z.number().nullish(),
-  annualBoost: z.number().nullish(),
-  installmentValue: z.number().nullish(),
+  totalPrice: z.coerce.number().nullish(),
+  minDown: z.coerce.number().nullish(),
+  installments: z.coerce.number().nullish(),
+  annualBoost: z.coerce.number().nullish(),
+  installmentValue: z.coerce.number().nullish(),
   paymentConditions: z.string().nullish(),
   paymentOptions: z.string().nullish(),
 })
@@ -61,9 +61,9 @@ export const propertySchema = z.object({
 export type PropertyForm = z.infer<typeof propertySchema>
 
 export type Property = PropertyForm & {
-  user: User
-  units: PropertyUnit[]
-  images: PropertyImage[]
-  adLinks: PropertyAdLink[]
-  leadProperties: LeadProperty[]
+  user?: User
+  units?: PropertyUnit[]
+  images?: PropertyImage[]
+  adLinks?: PropertyAdLink[]
+  leadProperties?: LeadProperty[]
 }

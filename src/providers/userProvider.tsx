@@ -10,7 +10,7 @@ import React, {
 import { useRouter } from 'next/navigation'
 import { destroyCookie } from 'nookies'
 import { authenticate } from '../services/user/authenticate'
-import { User } from '../schemas/userSchema'
+import { User, UserRole } from '../schemas/userSchema'
 import { Feature } from '../schemas/featureSchema'
 import { Plan } from '../schemas/planSchema'
 import { loadCurrentUserProfile } from '../services/user/loadCurrentUserProfile'
@@ -82,11 +82,17 @@ export function UserProvider({
 
   const login = async (email: string, password: string, redirect?: boolean) => {
     const authResult = await authenticate(email, password)
-
+    console.log({ authResult })
     if (authResult.user) {
       setCurrentUser(authResult.user)
       setCurrentPlan(authResult.plan)
       setPlanExpirationDate(authResult.planExpirationDate)
+
+      if (authResult.user.role === UserRole.ADMIN) {
+        console.log(authResult.user)
+        router.push('/admin/dashboard')
+        return
+      }
 
       if (redirect) router.push('/dashboard')
     }

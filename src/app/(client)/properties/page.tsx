@@ -120,7 +120,7 @@ export default function PropertiesPage() {
                   >
                     {property.name}
                   </Link>
-                  {property.units.length > 1 && (
+                  {property.units && property.units.length > 1 && (
                     <Badge variant="secondary" className="ml-2 text-[10px]">
                       Multiplas unid.
                     </Badge>

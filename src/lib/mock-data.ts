@@ -1,3 +1,4 @@
+import { Message, MessageSender } from '@/schemas/messageSchema'
 import type {
   Lead,
   Property,
@@ -611,44 +612,50 @@ export const mockKanbanColumns: KanbanColumn[] = [
 ]
 
 // ---- Chat Messages ----
-export const mockChatMessages: ChatMessage[] = [
+export const mockChatMessages: Message[] = [
   {
     id: 'c1',
-    sender: 'lead',
+    leadId: '1238109831092839012',
+    sender: MessageSender.LEAD,
     content: 'Ola, vi o anuncio do apartamento nos Jardins e tenho interesse.',
-    timestamp: '2026-02-24 09:00',
+    createdAt: new Date('2026-02-24T09:00:00'),
   },
   {
     id: 'c2',
-    sender: 'ai',
+    leadId: '1238109831092839012',
+    sender: MessageSender.AI,
     content:
       'Ola Ana! Que bom saber do seu interesse. O apartamento tem 120m2, 3 suites e fica na Oscar Freire. Gostaria de agendar uma visita?',
-    timestamp: '2026-02-24 09:01',
+    createdAt: new Date('2026-02-24T09:01:00'),
   },
   {
     id: 'c3',
-    sender: 'lead',
+    leadId: '1238109831092839012',
+    sender: MessageSender.LEAD,
     content: 'Sim! Pode ser sabado de manha?',
-    timestamp: '2026-02-24 09:05',
+    createdAt: new Date('2026-02-24T09:05:00'),
   },
   {
     id: 'c4',
-    sender: 'ai',
+    leadId: '1238109831092839012',
+    sender: MessageSender.AI,
     content: 'Perfeito! Tenho horario as 10h ou 11h no sabado. Qual prefere?',
-    timestamp: '2026-02-24 09:06',
+    createdAt: new Date('2026-02-24T09:06:00'),
   },
   {
     id: 'c5',
-    sender: 'lead',
+    leadId: '1238109831092839012',
+    sender: MessageSender.LEAD,
     content: '10h esta otimo!',
-    timestamp: '2026-02-24 09:10',
+    createdAt: new Date('2026-02-24T09:10:00'),
   },
   {
     id: 'c6',
-    sender: 'agent',
+    leadId: '1238109831092839012',
+    sender: MessageSender.BROKER,
     content:
       'Ana, confirmo sua visita para sabado as 10h. Vou te enviar o endereco completo por WhatsApp. Ate la!',
-    timestamp: '2026-02-24 09:15',
+    createdAt: new Date('2026-02-24T09:15:00'),
   },
 ]
 
@@ -658,13 +665,13 @@ export const clientKpis: KpiData[] = [
     label: 'Negociacao Ativa',
     value: 8,
     change: 12,
-    changeLabel: 'vs mes anterior',
+    changeLabel: 'vs mês anterior',
   },
   {
-    label: 'Cadencia / Follow-up',
+    label: 'Cadência / Follow-up',
     value: 4,
     change: -3,
-    changeLabel: 'vs mes anterior',
+    changeLabel: 'vs mês anterior',
   },
 ]
 

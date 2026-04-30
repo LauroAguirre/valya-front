@@ -2,14 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  LayoutDashboard,
-  Building2,
-  Kanban,
-  Bot,
-  User,
-  LogOut,
-} from 'lucide-react'
+import { LayoutDashboard, Building2, Kanban, User, LogOut } from 'lucide-react'
 import {
   Sidebar,
   SidebarContent,
@@ -27,13 +20,13 @@ import { useUserProvider } from '@/providers/userProvider'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/properties', label: 'Imóveis', icon: Building2 },
-  { href: '/pipeline', label: 'Esteira de Vendas', icon: Kanban },
-  { href: '/ai-config', label: 'Configuração IA', icon: Bot },
+  { href: '/ventures', label: 'Empreendimentos', icon: Building2 },
+  { href: '/real-state-agents', label: 'Corretores', icon: Kanban },
+  // { href: '/configuracao-ia', label: 'Configuração IA', icon: Bot },
   { href: '/profile', label: 'Perfil', icon: User },
 ]
 
-export function ClientSidebar() {
+export function CompanySidebar() {
   const ctxUser = useUserProvider()
   const { currentUser } = ctxUser
   const pathname = usePathname()

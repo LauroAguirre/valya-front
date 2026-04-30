@@ -17,20 +17,29 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Bot } from 'lucide-react'
 
+// interface ClientKpi {
+//   label: string
+//   value: number
+//   change: number
+//   changeLabel: string
+// }
+
 export default function DashboardPage() {
+  // const [kpis, setKpis] = useState<ClientKpi[]>([])
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-foreground text-2xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground text-sm">
-            Visao geral do seu desempenho
+            Visão geral do seu desempenho
           </p>
         </div>
         <Button asChild>
           <Link href="/configuracao-ia">
             <Bot className="mr-2 h-4 w-4" />
-            Configuracao da IA
+            Configuração da IA
           </Link>
         </Button>
       </div>
@@ -44,7 +53,7 @@ export default function DashboardPage() {
       <Card className="border-border bg-card">
         <CardHeader>
           <CardTitle className="text-card-foreground text-base">
-            Novos Leads vs Negocios Fechados
+            Novos Leads vs Negócios Fechados
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -64,15 +73,15 @@ export default function DashboardPage() {
               <Legend wrapperStyle={{ color: '#737373', fontSize: 12 }} />
               <Bar
                 dataKey="leads"
-                fill="#10b981"
+                fill="#586381"
                 radius={[4, 4, 0, 0]}
                 name="Novos Leads"
               />
               <Bar
                 dataKey="fechados"
-                fill="#0a0a0a"
+                fill="#eb7303"
                 radius={[4, 4, 0, 0]}
-                name="Negocios Fechados"
+                name="Negócios Fechados"
               />
             </BarChart>
           </ResponsiveContainer>

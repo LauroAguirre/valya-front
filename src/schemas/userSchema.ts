@@ -11,18 +11,18 @@ import { RealStateAgent } from './realStateAgentSchema'
 import { ConstructionCompanyUsers } from './constructionCompanySchema'
 
 export enum UserRole {
-  CLIENT,
-  ADMIN,
+  CLIENT = 'CLIENT',
+  ADMIN = 'ADMIN',
 }
 
 export enum AuthProvider {
-  LOCAL,
-  GOOGLE,
-  FACEBOOK,
+  LOCAL = 'LOCAL',
+  GOOGLE = 'GOOGLE',
+  FACEBOOK = 'FACEBOOK',
 }
 
 export const userSchema = z.object({
-  id: z.string().nullish(),
+  id: z.string().optional(),
   name: z.string(),
   email: z.email({
     error: 'Informe um e-mail válido.',
