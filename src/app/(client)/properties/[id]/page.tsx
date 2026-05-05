@@ -11,19 +11,15 @@ import {
   BbqType,
   GarageType,
   Property,
-  PropertyForm,
   PropertyMode,
   propertySchema,
 } from '@/schemas/propertySchema'
 import { loadProperty } from '@/services/properties/loadProperty'
-import { PropertyImage, propertyImageSchema } from '@/schemas/propertyImages'
+import { propertyImageSchema } from '@/schemas/propertyImages'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
-import {
-  PropertyAdLink,
-  propertyAdLinkSchema,
-} from '@/schemas/propertyAdLinkSchema'
+import { propertyAdLinkSchema } from '@/schemas/propertyAdLinkSchema'
 
 import { PropertyGeneralTab } from '@/components/client/property/generalTab'
 import { saveProperty } from '@/services/properties/saveProperty'
@@ -31,11 +27,7 @@ import { useUserProvider } from '@/providers/userProvider'
 import { PropertyFinancialTab } from '@/components/client/property/financialTab'
 import { PropertyAdsTab } from '@/components/client/property/adsTab'
 import { PropertyImagesTab } from '@/components/client/property/imagesTab'
-
-export interface PropertyFields extends PropertyForm {
-  images?: PropertyImage[]
-  adLinks?: PropertyAdLink[]
-}
+import z from 'zod'
 
 const formSchema = propertySchema
   .extend({
@@ -46,10 +38,8 @@ const formSchema = propertySchema
     message: 'Informe o nome do imóvel/empreendimento',
     path: ['name'],
   })
-  .refine(schema => !!schema.bbqType, {
-    message: 'Informe o tipo de churrasqueira.',
-    path: ['bbqType'],
-  })
+
+export type PropertyFormValues = z.input<typeof formSchema>
 
 export default function ImovelDetailPage({
   params,
@@ -61,7 +51,7 @@ export default function ImovelDetailPage({
 
   const [property, setProperty] = useState<Property | undefined>(undefined)
 
-  const form = useForm<PropertyFields>({
+  const form = useForm<PropertyFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       id: undefined,
@@ -125,7 +115,7 @@ export default function ImovelDetailPage({
     }
   }, [id])
 
-  const save = async (fields: PropertyFields) => {
+  const save = async (fields: PropertyFormValues) => {
     fields.userId = ctxUser.currentUser?.id
     const newProperty = await saveProperty(fields)
     if (newProperty?.id) {

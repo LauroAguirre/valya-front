@@ -33,8 +33,15 @@ export default function LoginPage() {
     delay: 0,
   })
   const loginSchema = z.object({
-    email: z.email(),
-    password: z.string().min(8),
+    email: z.email({
+      error: text =>
+        text === undefined ? 'Email invalido' : 'Informe seu e-mail',
+    }),
+    password: z.string({
+      error: text =>
+        text === undefined ? 'Senha invalida' : 'Informe sua senha',
+    }),
+    // .min(8, { message: 'Senha inválida' }),
   })
 
   type LoginForm = z.infer<typeof loginSchema>
@@ -48,7 +55,11 @@ export default function LoginPage() {
   })
 
   const login = async (fields: LoginForm) => {
-    ctxUser.login(fields.email, fields.password, true)
+    const { email, password } = fields
+
+    console.log(ctxUser.login)
+    ctxUser.login(email, password, true)
+    // ctxUser.login(fields.email, fields.password, true)
   }
 
   const onInvalid = (errors: unknown) => console.error(errors)
@@ -68,7 +79,7 @@ export default function LoginPage() {
             className="flex flex-col gap-4"
           >
             <FormField
-              {...form.control}
+              control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
@@ -81,7 +92,7 @@ export default function LoginPage() {
               )}
             />
             <FormField
-              {...form.control}
+              control={form.control}
               name="password"
               render={({ field }) => (
                 <FormItem>

@@ -57,6 +57,7 @@ export default function EsteiraPage() {
   })
 
   const kanbanColumns = useMemo(() => {
+    console.log({ activeLeads })
     const columns: KanbanColumn[] = [
       {
         id: 'qualification',
@@ -111,11 +112,13 @@ export default function EsteiraPage() {
 
     const loadLeads = async () => {
       const leads = await loadActiveLeads(ctxUser.currentUser?.id as string)
+
+      console.log({ leads })
       setActiveLeads(leads)
     }
 
     loadLeads()
-  }, [ctxUser])
+  }, [ctxUser.currentUser])
 
   return (
     <div className="flex flex-col gap-6">
@@ -132,7 +135,7 @@ export default function EsteiraPage() {
         <div className="flex gap-4 pb-4" style={{ minWidth: '1200px' }}>
           {kanbanColumns.map(column => (
             <div key={column.id} className="flex w-52 shrink-0 flex-col gap-3">
-              <div className="bg-secondary flex items-center justify-between rounded-lg px-3 py-2">
+              <div className="flex items-center justify-between rounded-lg bg-slate-300 px-3 py-2">
                 <div className="flex items-center gap-2">
                   <div className={`h-2.5 w-2.5 rounded-full ${column.color}`} />
                   <h3 className="text-foreground text-xs font-medium">

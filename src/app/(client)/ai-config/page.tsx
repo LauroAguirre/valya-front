@@ -94,56 +94,46 @@ export default function AiConfigsPage() {
   })
 
   useEffect(() => {
+    if (!ctxUser.currentUser) return
     const { 'valya-auth': token } = parseCookies()
     const socket = io(API_URL, { auth: { token } })
     socketRef.current = socket
 
-    socket.on('wppCommunication', ({ type, message }) => {
-      switch (type) {
-        case 'connection_update':
-          setEvolution(
-            prev =>
-              ({
-                ...(prev ?? {}),
-                status: message.status,
-                connected: message.connected,
-              }) as EvolutionConfig,
-          )
-          if (message.connected) {
-            setQrCode(null)
-          }
-          break
-        case 'logout_instance':
-          setEvolution(null)
-          break
-        case 'qrCode':
-          setQrCode(message.qrcode.base64)
-          break
-        default:
-          console.log('Evento não reconhecido:', type)
-      }
-      // if (type === 'connection_update') {
-      //   setEvolution(
-      //     prev =>
-      //       ({
-      //         ...(prev ?? {}),
-      //         status: message.status,
-      //         connected: message.connected,
-      //       }) as EvolutionConfig,
-      //   )
-      //   if (message.connected) {
-      //     setQrCode(null)
-      //   }
-      // } else if (type === 'qrCode') {
-      //   setQrCode(message.qrcode.base64)
-      // }
+    socket.on(
+      'connection_update',
+      (data: { status: string; connected: boolean }) => {
+        setEvolution(
+          prev =>
+            ({
+              ...(prev ?? {}),
+              status: data.status,
+              connected: data.connected,
+            }) as EvolutionConfig,
+        )
+        if (data.connected) {
+          setQrCode(null)
+        }
+      },
+    )
+
+    socket.on('logout_instance', () => {
+      setEvolution(null)
+    })
+
+    socket.on('qrCode', (data: { qrcode: { base64: string } }) => {
+      setQrCode(data.qrcode.base64)
+    })
+
+    socket.on('qr_code_v2', (data: { qrcode: { base64: string } }) => {
+      console.log({ data })
+      setQrCode(data.qrcode.base64)
     })
 
     return () => {
       socket.disconnect()
       socketRef.current = null
     }
-  }, [])
+  }, [ctxUser.currentUser?.id])
 
   useEffect(() => {
     if (!ctxUser.currentUser) return
@@ -171,6 +161,7 @@ export default function AiConfigsPage() {
 
   const handleActivateIntegration = async () => {
     const result = await createEvolutionInstance()
+    console.log({ result })
     if (!result) {
       toast.error('Falha ao ativar a integração. Por favor, tente novamente.')
       return

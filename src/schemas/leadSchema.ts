@@ -4,22 +4,22 @@ import { User } from './userSchema'
 import { Message } from './messageSchema'
 
 export enum LeadOrigin {
-  FACEBOOK,
-  INSTAGRAM,
-  TIKTOK,
-  GOOGLE,
-  WHATSAPP,
-  OTHER,
+  FACEBOOK = 'FACEBOOK',
+  INSTAGRAM = 'INSTAGRAM',
+  TIKTOK = 'TIKTOK',
+  GOOGLE = 'GOOGLE',
+  WHATSAPP = 'WHATSAPP',
+  OTHER = 'OTHER',
 }
 
 export enum LeadStage {
-  QUALIFICATION,
-  CADENCE,
-  VISITATION,
-  PROPOSAL,
-  CONTRACT,
-  WIN,
-  LOSS,
+  QUALIFICATION = 'QUALIFICATION',
+  CADENCE = 'CADENCE',
+  VISITATION = 'VISITATION',
+  PROPOSAL = 'PROPOSAL',
+  CONTRACT = 'CONTRACT',
+  WIN = 'WIN',
+  LOSS = 'LOSS',
 }
 
 export const leadSchema = z.object({

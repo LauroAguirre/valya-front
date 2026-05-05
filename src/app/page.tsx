@@ -1,19 +1,19 @@
-import { LandingHeader } from '@/components/landing/header'
-import { Hero } from '@/components/landing/hero'
-import { Benefits } from '@/components/landing/benefits'
-import { Pricing } from '@/components/landing/pricing'
-import { Footer } from '@/components/landing/footer'
+import { SiteFooter } from '@/components/landing/site-footer'
+import { PricingSection } from '@/components/landing/pricing-section'
+import { FeaturesSection } from '@/components/landing/features-section'
+import { HeroSection } from '@/components/landing/hero-section'
+import { SiteHeader } from '@/components/landing/site-header'
 
 export default function Home() {
   return (
-    <div className="dark bg-background min-h-screen font-sans">
-      <LandingHeader />
-      <main>
-        <Hero />
-        <Benefits />
-        <Pricing />
+    <div className="bg-background text-foreground flex min-h-dvh flex-col">
+      <SiteHeader />
+      <main className="flex-1">
+        <HeroSection />
+        <FeaturesSection />
+        <PricingSection />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   )
 }

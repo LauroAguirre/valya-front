@@ -26,7 +26,14 @@ export enum PropertyMode {
 export const propertySchema = z.object({
   id: z.string().nullish(),
   userId: z.string().nullish(),
-  name: z.string().nullish(),
+  companyId: z.string().nullish(),
+  name: z
+    .string()
+    .nullish()
+    .refine(
+      val => !!val && val.length > 1,
+      'Informe o nome do imóvel/empreendimento',
+    ),
   address: z.string().nullish(),
   bedrooms: z.number().nullish(),
   garageCount: z.number().nullish(),
@@ -66,4 +73,5 @@ export type Property = PropertyForm & {
   images?: PropertyImage[]
   adLinks?: PropertyAdLink[]
   leadProperties?: LeadProperty[]
+  optedOut?: boolean
 }

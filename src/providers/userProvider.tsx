@@ -81,6 +81,7 @@ export function UserProvider({
   }
 
   const login = async (email: string, password: string, redirect?: boolean) => {
+    console.log('aqui no login....')
     const authResult = await authenticate(email, password)
     console.log({ authResult })
     if (authResult.user) {
@@ -94,7 +95,7 @@ export function UserProvider({
         return
       }
 
-      if (redirect) router.push('/dashboard')
+      if (redirect) router.push('company/dashboard')
     }
   }
 

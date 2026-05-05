@@ -2,7 +2,17 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Building2, Kanban, User, LogOut } from 'lucide-react'
+import {
+  LayoutDashboard,
+  Building2,
+  Kanban,
+  User,
+  Users,
+  Settings,
+  LogOut,
+  CalendarCheck2,
+  TrendingUp,
+} from 'lucide-react'
 import {
   Sidebar,
   SidebarContent,
@@ -17,19 +27,38 @@ import {
 } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { useUserProvider } from '@/providers/userProvider'
+import { CompanyUserRole } from '@/schemas/constructionCompanySchema'
 
-const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/ventures', label: 'Empreendimentos', icon: Building2 },
-  { href: '/real-state-agents', label: 'Corretores', icon: Kanban },
-  // { href: '/configuracao-ia', label: 'Configuração IA', icon: Bot },
-  { href: '/profile', label: 'Perfil', icon: User },
+const baseNavItems = [
+  { href: '/company/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/company/developments', label: 'Empreendimentos', icon: Building2 },
+  { href: '/company/brokers', label: 'Corretores', icon: Kanban },
+  { href: '/company/reservations', label: 'Reservas', icon: CalendarCheck2 },
+  { href: '/company/sales', label: 'Vendas', icon: TrendingUp },
+  { href: '/company/settings', label: 'Configurações', icon: Settings },
+  { href: '/company/profile', label: 'Perfil', icon: User },
 ]
 
+const usersNavItem = {
+  href: '/company/users',
+  label: 'Usuários',
+  icon: Users,
+}
+
 export function CompanySidebar() {
-  const ctxUser = useUserProvider()
-  const { currentUser } = ctxUser
+  const { currentUser } = useUserProvider()
   const pathname = usePathname()
+
+  const canManageUsers =
+    currentUser?.companyUsers?.some(
+      cu =>
+        cu.role === CompanyUserRole.ADMIN ||
+        cu.role === CompanyUserRole.MANAGER,
+    ) ?? false
+
+  const navItems = canManageUsers
+    ? [...baseNavItems, usersNavItem]
+    : baseNavItems
 
   return (
     <Sidebar className="border-sidebar-border">

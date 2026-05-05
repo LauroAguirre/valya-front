@@ -148,8 +148,8 @@ export interface Payment {
 export interface KpiData {
   label: string
   value: string | number
-  change?: number
-  changeLabel?: string
+  change?: number | null
+  changeLabel?: string | null
 }
 
 export interface ChartDataPoint {

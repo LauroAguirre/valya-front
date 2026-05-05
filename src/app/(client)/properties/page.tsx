@@ -3,9 +3,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Plus, Search } from 'lucide-react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import { Switch } from '@/components/ui/switch'
+import { Toaster } from '@/components/ui/sonner'
 import {
   Table,
   TableBody,
@@ -14,24 +17,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { mockProperties, formatCurrency } from '@/lib/mock-data'
+import { formatCurrency } from '@/lib/mock-data'
 import { Property } from '@/schemas/propertySchema'
 import { loadPropertiesPage } from '@/services/properties/loadProperties'
+import { optOutProperty } from '@/services/properties/optOutProperty'
 import { usePromiseTracker } from 'react-promise-tracker'
 import { Spinner } from '@/components/ui/spinner'
-
-// const statusMap: Record<
-//   string,
-//   {
-//     label: string
-//     variant: 'default' | 'secondary' | 'destructive' | 'outline'
-//   }
-// > = {
-//   ativo: { label: 'Ativo', variant: 'default' },
-//   inativo: { label: 'Inativo', variant: 'secondary' },
-//   vendido: { label: 'Vendido', variant: 'outline' },
-//   alugado: { label: 'Alugado', variant: 'outline' },
-// }
 
 export default function PropertiesPage() {
   const [search, setSearch] = useState('')
@@ -44,8 +35,7 @@ export default function PropertiesPage() {
   const filtered = properties.filter(
     p =>
       (p.name && p.name.toLowerCase().includes(search.toLowerCase())) ||
-      (p.address && p.address.toLowerCase().includes(search.toLowerCase())), // ||
-    // p.city.toLowerCase().includes(search.toLowerCase()),
+      (p.address && p.address.toLowerCase().includes(search.toLowerCase())),
   )
 
   useEffect(() => {
@@ -61,6 +51,25 @@ export default function PropertiesPage() {
     setProperties(prop.data as Property[])
   }
 
+  async function handleOptOut(property: Property, checked: boolean) {
+    const id = property.id
+    if (!id) return
+
+    setProperties(prev =>
+      prev.map(p => (p.id === id ? { ...p, optedOut: !checked } : p)),
+    )
+
+    const ok = await optOutProperty(id, !checked)
+    if (!ok) {
+      setProperties(prev =>
+        prev.map(p => (p.id === id ? { ...p, optedOut: checked } : p)),
+      )
+      toast.error('Erro ao atualizar visibilidade do imóvel.')
+    }
+  }
+
+  const hasConstructorProperties = filtered.some(p => !!p.companyId)
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -69,11 +78,14 @@ export default function PropertiesPage() {
             Imoveis / Empreendimentos
           </h1>
           <p className="text-muted-foreground text-sm">
-            {mockProperties.length} imoveis cadastrados
+            {properties.length} imoveis cadastrados
           </p>
         </div>
         <Button asChild>
-          <Link href="/imoveis/_" className="flex items-center gap-1">
+          <Link
+            href="/properties/_"
+            className="bg-secondary text-primary-foreground flex items-center gap-1 rounded-md p-2 text-sm font-medium transition-all hover:opacity-80"
+          >
             <Plus className="mr-2 h-4 w-4" />
             Novo Imóvel
           </Link>
@@ -86,7 +98,7 @@ export default function PropertiesPage() {
           placeholder="Buscar por nome, bairro ou cidade..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="bg-secondary pl-10"
+          className="pl-10"
         />
       </div>
 
@@ -105,6 +117,11 @@ export default function PropertiesPage() {
                 Preco
               </TableHead>
               <TableHead className="text-muted-foreground">Status</TableHead>
+              {hasConstructorProperties && (
+                <TableHead className="text-muted-foreground text-center">
+                  Visível
+                </TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -115,7 +132,7 @@ export default function PropertiesPage() {
               >
                 <TableCell>
                   <Link
-                    href={`/imoveis/${property.id}`}
+                    href={`/properties/${property.id}`}
                     className="text-foreground hover:text-primary font-medium"
                   >
                     {property.name}
@@ -123,6 +140,11 @@ export default function PropertiesPage() {
                   {property.units && property.units.length > 1 && (
                     <Badge variant="secondary" className="ml-2 text-[10px]">
                       Multiplas unid.
+                    </Badge>
+                  )}
+                  {property.companyId && (
+                    <Badge variant="outline" className="ml-2 text-[10px]">
+                      Construtora
                     </Badge>
                   )}
                 </TableCell>
@@ -135,17 +157,26 @@ export default function PropertiesPage() {
                 <TableCell className="text-foreground text-right">
                   {property.totalPrice
                     ? formatCurrency(property.totalPrice)
-                    : // : property.rentPrice
-                      //   ? `${formatCurrency(property.rentPrice)}/mes`
-                      'Consultar'}
+                    : 'Consultar'}
                 </TableCell>
-                {/* <TableCell>
-                  <Badge
-                    variant={statusMap[property.status]?.variant ?? 'secondary'}
-                  >
-                    {statusMap[property.status]?.label ?? property.status}
-                  </Badge>
-                </TableCell> */}
+                <TableCell />
+                {hasConstructorProperties && (
+                  <TableCell className="text-center">
+                    {property.companyId ? (
+                      <Switch
+                        checked={!property.optedOut}
+                        onCheckedChange={checked =>
+                          handleOptOut(property, checked)
+                        }
+                        aria-label={
+                          property.optedOut
+                            ? 'Reativar imóvel'
+                            : 'Ocultar imóvel'
+                        }
+                      />
+                    ) : null}
+                  </TableCell>
+                )}
               </TableRow>
             ))}
           </TableBody>
@@ -159,6 +190,8 @@ export default function PropertiesPage() {
           </div>
         )}
       </div>
+
+      <Toaster />
     </div>
   )
 }

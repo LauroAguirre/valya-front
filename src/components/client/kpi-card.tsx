@@ -17,7 +17,7 @@ export function KpiCard({ data }: { data: KpiData }) {
         <div className="text-card-foreground text-2xl font-bold">
           {data.value}
         </div>
-        {data.change !== undefined && (
+        {data.change != null && (
           <div
             className={cn(
               'mt-1 flex items-center gap-1 text-xs',
