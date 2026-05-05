@@ -17,5 +17,7 @@ export type RealStateAgentForm = z.infer<typeof realStateAgentSchema>
 export type RealStateAgent = RealStateAgentForm & {
   user: User
   subscriptions: Subscription[]
+  city?: string
+  uf?: string
   // plans: RealStateAgentPlanHistory[]
 }
