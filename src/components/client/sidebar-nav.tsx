@@ -9,7 +9,6 @@ import {
   Bot,
   User,
   LogOut,
-  MessageSquare,
 } from 'lucide-react'
 import {
   Sidebar,
@@ -31,7 +30,6 @@ const navItems = [
   { href: '/properties', label: 'Imóveis', icon: Building2 },
   { href: '/pipeline', label: 'Esteira de Vendas', icon: Kanban },
   { href: '/ai-config', label: 'Configuração IA', icon: Bot },
-  { href: '/whatsapp-meta', label: 'WhatsApp Meta', icon: MessageSquare },
   { href: '/profile', label: 'Perfil', icon: User },
 ]
 

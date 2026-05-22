@@ -28,7 +28,7 @@ export function SubscriptionBanner({ hasCard }: SubscriptionBannerProps) {
 
   return (
     <>
-      <div className="bg-warning text-warning-foreground flex items-center justify-between gap-4 px-4 py-2.5">
+      <div className="bg-warning text-warning-foreground flex items-center justify-between gap-4 bg-amber-400 px-4 py-2.5">
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-4 w-4 shrink-0" />
           <p className="text-sm font-medium">
@@ -39,7 +39,7 @@ export function SubscriptionBanner({ hasCard }: SubscriptionBannerProps) {
         <div className="flex items-center gap-2">
           <Button
             size="sm"
-            variant="secondary"
+            variant="default"
             className="h-7 text-xs"
             onClick={() => setSheetOpen(true)}
           >
