@@ -95,7 +95,7 @@ export function UserProvider({
         return
       }
 
-      if (redirect) router.push('company/dashboard')
+      if (redirect) router.push('/dashboard')
     }
   }
 

@@ -22,6 +22,9 @@ export enum IntentCategory {
   OTHER,
 }
 
+export const MessageChannel = z.enum(['EVOLUTION', 'META'])
+export type MessageChannel = z.infer<typeof MessageChannel>
+
 export const messageSchema = z.object({
   id: z.string().nullish(),
   leadId: z.string().nullish(),
@@ -29,6 +32,9 @@ export const messageSchema = z.object({
   content: z.string().nullish(),
   mediaUrl: z.string().nullish(),
   intent: z.enum(IntentCategory).nullish(),
+  channel: MessageChannel.default('EVOLUTION'),
+  metaMessageId: z.string().nullish(),
+  evolutionMessageId: z.string().nullish(),
   createdAt: z.date().default(new Date()),
 })
 

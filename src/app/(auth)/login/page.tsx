@@ -57,7 +57,7 @@ export default function LoginPage() {
   const login = async (fields: LoginForm) => {
     const { email, password } = fields
 
-    console.log(ctxUser.login)
+    console.log({ fields })
     ctxUser.login(email, password, true)
     // ctxUser.login(fields.email, fields.password, true)
   }

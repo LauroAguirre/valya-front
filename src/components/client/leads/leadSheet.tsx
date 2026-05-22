@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Lead } from '@/schemas/leadSchema'
 import { format } from 'date-fns'
 import { Label } from '@/components/ui/label'
-import { Building2, ChevronUp, Phone } from 'lucide-react'
+import { Building2, ChevronUp, Phone, Zap } from 'lucide-react'
 import { Switch } from '@/components/ui/switch'
 import { Message, MessageSender } from '@/schemas/messageSchema'
 import { useEffect, useRef, useState } from 'react'
@@ -223,7 +223,7 @@ export const LeadSheet = ({
                                 : 'bg-primary text-primary-foreground'
                           }`}
                         >
-                          <div className="mb-1 flex items-center gap-1">
+                          <div className="mb-1 flex items-center gap-1.5">
                             <span className="text-[10px] font-semibold opacity-70">
                               {msg.sender === MessageSender.LEAD
                                 ? 'Lead'
@@ -231,6 +231,12 @@ export const LeadSheet = ({
                                   ? 'IA Valya'
                                   : 'Voce'}
                             </span>
+                            {msg.channel === 'META' && (
+                              <span className="flex items-center gap-0.5 rounded bg-blue-500/15 px-1 py-0.5 text-[9px] font-semibold text-blue-600">
+                                <Zap className="h-2.5 w-2.5" />
+                                API Oficial
+                              </span>
+                            )}
                           </div>
                           <p>{msg.content}</p>
                           <p className="mt-1 text-right text-[10px] opacity-50">

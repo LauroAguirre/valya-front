@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"F:\\\\Desenv\\\\Valya\\\\valya-front\\\\src\" -Recurse -Include \"*.ts\", \"*.tsx\")",
+      "Bash(Select-Object FullName)"
+    ]
+  }
+}
