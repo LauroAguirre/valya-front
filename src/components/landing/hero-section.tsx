@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Bot, MessageCircle, Zap } from 'lucide-react'
+import { Bot, MessageCircle, Zap } from 'lucide-react'
 
 /**
  * Hero principal da Valya. Fundo composto por gradiente sutil,
@@ -34,11 +34,9 @@ export function HeroSection() {
           </span>
 
           <h1 className="text-foreground mt-6 text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-            Sua imobiliária aberta 24/7.{' '}
-            <span className="text-brand-orange">
-              A IA que atende, qualifica
-            </span>{' '}
-            e agenda visitas para você.
+            Atendimento 24/7.{' '}
+            <span className="text-brand-orange">IA que atende, qualifica</span>{' '}
+            e deixa o lead pronto para comprar!
           </h1>
 
           <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-base leading-relaxed text-pretty sm:text-lg">
@@ -47,18 +45,18 @@ export function HeroSection() {
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
+            {/* <Link
               href="/registro"
               className="bg-brand-orange shadow-brand-orange/20 hover:bg-brand-orange-hover focus-visible:ring-brand-orange inline-flex h-12 w-full items-center justify-center gap-2 rounded-md px-6 text-sm font-semibold text-white shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
             >
               Começar Gratuitamente
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
+            </Link> */}
             <Link
               href="#funcionalidades"
               className="bg-brand-blue hover:bg-brand-blue-hover focus-visible:ring-brand-blue inline-flex h-12 w-full items-center justify-center gap-2 rounded-md px-6 text-sm font-semibold text-white shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
             >
-              Entender a Plataforma
+              Comece agora
             </Link>
           </div>
 

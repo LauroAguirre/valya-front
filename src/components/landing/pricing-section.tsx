@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { Check, Sparkles } from 'lucide-react'
 
-const freeFeatures = [
-  'Até 50 leads/mês qualificados pela IA',
-  'Integração com 1 número de WhatsApp',
-  'Cadência automática básica',
-  'Dashboard com métricas essenciais',
-]
+// const freeFeatures = [
+//   'Até 50 leads/mês qualificados pela IA',
+//   'Integração com 1 número de WhatsApp',
+//   'Cadência automática básica',
+//   'Dashboard com métricas essenciais',
+// ]
 
 const premiumFeatures = [
   'Leads qualificados ilimitados',
@@ -33,18 +33,25 @@ export function PricingSection() {
             id="pricing-heading"
             className="text-foreground mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
-            Comece grátis.{' '}
-            <span className="text-brand-orange">Evolua quando quiser.</span>
+            Comece agora!{' '}
+            <p className="text-brand-orange">
+              Seja o próximo a aproveitar o valor especial para os primeiros 100
+              usuários.
+            </p>
           </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty">
+          {/* <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty">
             Um plano gratuito para começar e um Premium único, exclusivo para
             corretores de imóveis.
+          </p> */}
+          <p className="mt-4">
+            <strong className="text-2xl">Usuários atuais (23/100)</strong>
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+        {/* <div className="mt-14 grid gap-6 lg:grid-cols-2"> */}
+        <div className="mt-8 flex justify-center">
           {/* Plano Gratuito */}
-          <article className="border-border bg-card flex flex-col rounded-2xl border p-8 shadow-sm">
+          {/* <article className="border-border bg-card flex flex-col rounded-2xl border p-8 shadow-sm">
             <header>
               <h3 className="text-brand-blue text-sm font-semibold tracking-wider uppercase">
                 Gratuito
@@ -83,7 +90,7 @@ export function PricingSection() {
                 Criar conta grátis
               </Link>
             </div>
-          </article>
+          </article> */}
 
           {/* Plano Premium */}
           <article className="border-brand-orange bg-card shadow-brand-orange/10 relative flex flex-col overflow-hidden rounded-2xl border-2 p-8 shadow-lg">
@@ -94,18 +101,18 @@ export function PricingSection() {
             <header className="relative">
               <div className="flex items-center justify-between">
                 <h3 className="text-brand-orange text-sm font-semibold tracking-wider uppercase">
-                  Premium
+                  Starter
                 </h3>
                 <span className="bg-brand-orange inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold text-white">
                   <Sparkles className="h-3 w-3" aria-hidden="true" />
                   Para corretores
                 </span>
               </div>
-              <p className="mt-3 flex items-baseline gap-1.5">
+              {/* <p className="mt-3 flex items-baseline gap-1.5">
                 <span className="text-foreground text-5xl font-semibold tracking-tight">
                   Plano único
                 </span>
-              </p>
+              </p> */}
               <p className="text-muted-foreground mt-2 text-sm">
                 Todos os recursos da Valya, exclusivo para corretores de
                 imóveis.
@@ -130,9 +137,10 @@ export function PricingSection() {
             <div className="relative mt-auto pt-8">
               <Link
                 href="/registro"
-                className="bg-brand-orange shadow-brand-orange/20 hover:bg-brand-orange-hover focus-visible:ring-brand-orange inline-flex h-11 w-full items-center justify-center rounded-md px-5 text-sm font-semibold text-white shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="bg-brand-blue shadow-brand-blue/20 hover:bg-brand-orange-hover focus-visible:ring-brand-orange inline-flex h-11 w-full items-center justify-center rounded-md px-5 text-sm font-semibold text-white shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                // className="bg-brand-orange shadow-brand-orange/20 hover:bg-brand-orange-hover focus-visible:ring-brand-orange inline-flex h-11 w-full items-center justify-center rounded-md px-5 text-sm font-semibold text-white shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
-                Quero o Premium
+                Quero me cadastrar
               </Link>
             </div>
           </article>
