@@ -196,7 +196,7 @@ export function RegisterStepTwo({
                     </span>
                   </label>
                   <label className="border-input flex cursor-pointer items-center gap-3 rounded-md border p-3 text-sm">
-                    <RadioGroupItem value="UNDEFINED" />
+                    <RadioGroupItem value="BOLETO" />
                     <span>
                       <span className="font-medium">Boleto ou PIX</span>
                       <span className="text-muted-foreground block text-xs">
