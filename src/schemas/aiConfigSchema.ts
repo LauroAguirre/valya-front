@@ -10,7 +10,7 @@ export const aiConfigSchema = z.object({
   updatedAt: z.date().nullish(),
 })
 
-export type AiConfigForm = z.infer<typeof aiConfigSchema>
+export type AiConfigForm = z.input<typeof aiConfigSchema>
 
 export type AiConfig = AiConfigForm & {
   user: User

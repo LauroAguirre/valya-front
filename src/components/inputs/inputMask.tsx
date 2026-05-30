@@ -14,7 +14,9 @@ export interface InputProps extends Omit<
   'value'
 > {
   ref: Ref<unknown>
-  mask: string
+  // Aceita uma máscara simples (string) ou uma máscara dinâmica do imask
+  // (lista de padrões, ex.: CPF vs CNPJ ou telefone fixo vs celular).
+  mask: string | readonly { mask: string }[]
   onAccept?: (value: string, maskRef?: unknown) => void
 }
 
@@ -26,7 +28,7 @@ export const InputMask = ({
 }: InputProps) => {
   return (
     <IMaskInput
-      mask={mask}
+      mask={mask as never}
       unmask={true}
       onBlur={props.onBlur}
       onAccept={onAccept}
