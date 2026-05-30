@@ -9,7 +9,7 @@ export type ActivateAgentPayload = {
   postalCode?: string
   address?: string
   addressNumber?: string
-  billingType: 'CREDIT_CARD' | 'UNDEFINED'
+  billingType: 'CREDIT_CARD' | 'BOLETO'
   creditCard?: {
     holderName: string
     number: string

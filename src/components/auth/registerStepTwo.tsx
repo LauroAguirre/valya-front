@@ -113,6 +113,8 @@ export function RegisterStepTwo({
       }
     }
 
+    console.log({ payload })
+
     const result = await activateAgentSubscription(payload, token)
 
     if (result.success) {

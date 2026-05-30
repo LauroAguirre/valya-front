@@ -4,7 +4,7 @@ import { cpf, cnpj } from 'cpf-cnpj-validator'
 // Formas de pagamento aceitas na ativação da assinatura (Asaas).
 // CREDIT_CARD -> cobrança recorrente automática (coleta dados do cartão).
 // UNDEFINED   -> cliente escolhe boleto/PIX a cada fatura (não coleta cartão).
-export const AGENT_BILLING_TYPES = ['CREDIT_CARD', 'UNDEFINED'] as const
+export const AGENT_BILLING_TYPES = ['CREDIT_CARD', 'BOLETO'] as const
 export type AgentBillingType = (typeof AGENT_BILLING_TYPES)[number]
 
 const creditCardSchema = z.object({
