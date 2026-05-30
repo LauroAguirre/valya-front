@@ -261,7 +261,12 @@ export function RegisterStepTwo({
               <FormItem className="flex-1">
                 <FormLabel>CEP {isCreditCard ? '' : '(opcional)'}</FormLabel>
                 <FormControl>
-                  <Input inputMode="numeric" {...field} />
+                  {/* <Input inputMode="numeric" {...field} /> */}
+                  <InputMask
+                    inputMode="numeric"
+                    mask={[{ mask: '00000-000' }]}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
