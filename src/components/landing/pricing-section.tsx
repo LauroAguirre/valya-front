@@ -87,7 +87,7 @@ export function PricingSection() {
                 href="/registro"
                 className="bg-brand-blue hover:bg-brand-blue-hover focus-visible:ring-brand-blue inline-flex h-11 w-full items-center justify-center rounded-md px-5 text-sm font-semibold text-white transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
-                Criar conta grátis
+                Criar conta 
               </Link>
             </div>
           </article> */}

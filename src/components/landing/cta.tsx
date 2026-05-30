@@ -12,14 +12,13 @@ export function FinalCTA() {
           Pronto para ter uma IA trabalhando por você?
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-white/70">
-          Comece agora com 30 dias grátis. Sem cartão de crédito. Cancele quando
-          quiser.
+          Comece agora. Veja os resultados. Cancele quando quiser.
         </p>
         <Link
           href="/register"
           className="mt-10 inline-flex items-center gap-2 rounded-xl bg-[#FF6600] px-10 py-4 text-base font-semibold text-white shadow-lg shadow-[#FF6600]/25 transition-colors hover:bg-[#e55a00]"
         >
-          Testar grátis por 30 dias
+          Cadastre-se agora!
           <ArrowRight className="h-5 w-5" />
         </Link>
         <p className="mt-4 text-sm text-white/40">

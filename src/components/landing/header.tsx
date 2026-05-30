@@ -12,7 +12,11 @@ export function LandingHeader() {
     <header className="fixed top-0 right-0 left-0 z-50 border-b border-white/10 bg-[#0D1F3C]/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center">
-          <ValyaLogo fill="#576381" wordmarkColor="#FFFFFF" className="h-8 w-8" />
+          <ValyaLogo
+            fill="#576381"
+            wordmarkColor="#FFFFFF"
+            className="h-8 w-8"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -47,7 +51,7 @@ export function LandingHeader() {
             href="/register"
             className="rounded-lg bg-[#FF6600] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e55a00]"
           >
-            Teste grátis 30 dias
+            Cadastrar agora
           </Link>
         </div>
 
@@ -61,7 +65,7 @@ export function LandingHeader() {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-white/10 bg-[#0D1F3C] px-6 pb-6 pt-4 md:hidden">
+        <div className="border-t border-white/10 bg-[#0D1F3C] px-6 pt-4 pb-6 md:hidden">
           <nav className="flex flex-col gap-4">
             <a
               href="#recursos"
@@ -95,7 +99,7 @@ export function LandingHeader() {
                 href="/register"
                 className="rounded-lg bg-[#FF6600] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#e55a00]"
               >
-                Teste grátis 30 dias
+                Cadastre-se
               </Link>
             </div>
           </nav>

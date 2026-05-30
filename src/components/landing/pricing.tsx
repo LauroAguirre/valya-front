@@ -21,10 +21,10 @@ export function Pricing() {
             className="mt-3 text-3xl font-bold tracking-tight text-balance text-[#003366] md:text-4xl"
             style={{ fontFamily: 'var(--font-rubik), sans-serif' }}
           >
-            Comece com 30 dias grátis
+            Comece agora
           </h2>
           <p className="mt-4 text-gray-500">
-            Sem cartão de crédito. Sem burocracia. Cancele quando quiser.
+            Sem burocracia. Fácil e rápido. Cancele quando quiser.
           </p>
         </div>
 

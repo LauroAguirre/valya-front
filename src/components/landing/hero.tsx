@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle } from 'lucide-react'
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0D1F3C] px-6 pb-16 pt-28">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0D1F3C] px-6 pt-28 pb-16">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,#1A4D8C2A_0%,transparent_100%)]" />
       <div className="pointer-events-none absolute top-0 left-1/2 h-px w-[480px] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#FF6600]/40 to-transparent" />
 
@@ -15,15 +15,14 @@ export function Hero() {
           </div>
 
           <h1
-            className="text-balance text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl"
+            className="text-4xl leading-tight font-bold tracking-tight text-balance text-white md:text-5xl lg:text-6xl"
             style={{ fontFamily: 'var(--font-rubik), sans-serif' }}
           >
             Qualifique leads no WhatsApp.{' '}
-            <span className="text-[#FF6600]">Venda mais.</span>{' '}
-            Trabalhe menos.
+            <span className="text-[#FF6600]">Venda mais.</span> Trabalhe menos.
           </h1>
 
-          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/70 text-pretty lg:mx-0 md:text-lg">
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-pretty text-white/70 md:text-lg lg:mx-0">
             A Valya conecta IA ao seu WhatsApp e qualifica leads automaticamente
             — 24h por dia. Você só fala com quem está realmente pronto para
             comprar.
@@ -34,7 +33,7 @@ export function Hero() {
               href="/register"
               className="inline-flex items-center gap-2 rounded-xl bg-[#FF6600] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#FF6600]/25 transition-colors hover:bg-[#e55a00]"
             >
-              Testar grátis por 30 dias
+              Fazer meu cadastro
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a
@@ -46,14 +45,19 @@ export function Hero() {
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-            {['Sem cartão de crédito', 'Setup em 5 minutos', 'Cancele quando quiser'].map(
-              item => (
-                <span key={item} className="flex items-center gap-1.5 text-sm text-white/50">
-                  <CheckCircle className="h-3.5 w-3.5 text-[#FF6600]" />
-                  {item}
-                </span>
-              ),
-            )}
+            {[
+              'Sem cartão de crédito',
+              'Setup em 5 minutos',
+              'Cancele quando quiser',
+            ].map(item => (
+              <span
+                key={item}
+                className="flex items-center gap-1.5 text-sm text-white/50"
+              >
+                <CheckCircle className="h-3.5 w-3.5 text-[#FF6600]" />
+                {item}
+              </span>
+            ))}
           </div>
         </div>
 
@@ -80,8 +84,8 @@ export function Hero() {
               </div>
               <div className="flex justify-start">
                 <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-white/10 px-3.5 py-2.5 text-sm text-white/90">
-                  Olá! O apartamento tem 3 suítes e 120m². Qual é seu
-                  orçamento? Assim encontro as melhores opções 😊
+                  Olá! O apartamento tem 3 suítes e 120m². Qual é seu orçamento?
+                  Assim encontro as melhores opções 😊
                 </div>
               </div>
               <div className="flex justify-end">
@@ -91,14 +95,16 @@ export function Hero() {
               </div>
               <div className="flex justify-start">
                 <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-white/10 px-3.5 py-2.5 text-sm text-white/90">
-                  Perfeito! Esse imóvel encaixa no seu perfil. Posso agendar
-                  uma visita para sábado? 📅
+                  Perfeito! Esse imóvel encaixa no seu perfil. Posso agendar uma
+                  visita para sábado? 📅
                 </div>
               </div>
             </div>
 
             <div className="mt-4 flex items-center justify-between rounded-xl bg-[#FF6600]/10 px-3 py-2">
-              <span className="text-xs text-[#FF6600]">Lead qualificado automaticamente</span>
+              <span className="text-xs text-[#FF6600]">
+                Lead qualificado automaticamente
+              </span>
               <span className="rounded-full bg-[#FF6600] px-2 py-0.5 text-xs font-semibold text-white">
                 Quente
               </span>

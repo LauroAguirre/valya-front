@@ -27,7 +27,7 @@ export function SiteHeader() {
             href="/registro"
             className="bg-brand-orange hover:bg-brand-orange-hover focus-visible:ring-brand-orange focus-visible:ring-offset-background inline-flex h-10 items-center rounded-md px-4 text-sm font-semibold text-white shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
-            <span className="hidden sm:inline">Criar Conta Grátis</span>
+            <span className="hidden sm:inline">Criar Conta</span>
             <span className="sm:hidden">Cadastrar</span>
           </Link>
         </nav>
