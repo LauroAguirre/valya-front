@@ -45,10 +45,12 @@ export const LeadSheet = ({
   }, [lead?.id])
 
   useEffect(() => {
+    console.log({ lead })
     if (!lead?.id) return
 
     const fetchPage = async () => {
       const result = await loadChatHistory({ page, leadId: lead.id as string })
+      console.log({ result })
       if (page === 1) {
         setMessages(result.data)
         setTimeout(() => bottomRef.current?.scrollIntoView(), 50)
