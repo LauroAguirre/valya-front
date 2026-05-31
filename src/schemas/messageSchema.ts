@@ -1,11 +1,8 @@
 import { z } from 'zod'
 import { Lead } from './leadSchema'
 
-export enum MessageSender {
-  LEAD,
-  AI,
-  BROKER,
-}
+export const MessageSender = z.enum(['LEAD', 'AI', 'BROKER'])
+export type MessageSender = z.infer<typeof MessageSender>
 
 export enum IntentCategory {
   GREETING,
@@ -28,7 +25,7 @@ export type MessageChannel = z.infer<typeof MessageChannel>
 export const messageSchema = z.object({
   id: z.string().nullish(),
   leadId: z.string().nullish(),
-  sender: z.enum(MessageSender),
+  sender: MessageSender,
   content: z.string().nullish(),
   mediaUrl: z.string().nullish(),
   intent: z.enum(IntentCategory).nullish(),

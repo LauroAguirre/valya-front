@@ -45,12 +45,10 @@ export const LeadSheet = ({
   }, [lead?.id])
 
   useEffect(() => {
-    console.log({ lead })
     if (!lead?.id) return
 
     const fetchPage = async () => {
       const result = await loadChatHistory({ page, leadId: lead.id as string })
-      console.log({ result })
       if (page === 1) {
         setMessages(result.data)
         setTimeout(() => bottomRef.current?.scrollIntoView(), 50)
@@ -73,7 +71,7 @@ export const LeadSheet = ({
         <SheetHeader>
           <SheetTitle className="text-card-foreground">{lead?.name}</SheetTitle>
           <SheetDescription>
-            Detalhes do lead e historico de atendimento
+            Detalhes do lead e histórico de atendimento
           </SheetDescription>
         </SheetHeader>
 
@@ -214,24 +212,24 @@ export const LeadSheet = ({
                     {messages.map(msg => (
                       <div
                         key={msg.id}
-                        className={`flex ${msg.sender === MessageSender.LEAD ? 'justify-start' : 'justify-end'}`}
+                        className={`flex ${msg.sender === MessageSender.enum.LEAD ? 'justify-start' : 'justify-end'}`}
                       >
                         <div
-                          className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
-                            msg.sender === MessageSender.LEAD
+                          className={`flex max-w-[80%] flex-col rounded-lg px-3 py-2 text-sm ${
+                            msg.sender === MessageSender.enum.LEAD
                               ? 'bg-secondary text-secondary-foreground'
-                              : msg.sender === MessageSender.AI
+                              : msg.sender === MessageSender.enum.AI
                                 ? 'border-primary/20 bg-primary/5 text-foreground border'
                                 : 'bg-primary text-primary-foreground'
                           }`}
                         >
                           <div className="mb-1 flex items-center gap-1.5">
                             <span className="text-[10px] font-semibold opacity-70">
-                              {msg.sender === MessageSender.LEAD
+                              {msg.sender === MessageSender.enum.LEAD
                                 ? 'Lead'
-                                : msg.sender === MessageSender.AI
+                                : msg.sender === MessageSender.enum.AI
                                   ? 'IA Valya'
-                                  : 'Voce'}
+                                  : 'Você'}
                             </span>
                             {msg.channel === 'META' && (
                               <span className="flex items-center gap-0.5 rounded bg-blue-500/15 px-1 py-0.5 text-[9px] font-semibold text-blue-600">
@@ -240,7 +238,9 @@ export const LeadSheet = ({
                               </span>
                             )}
                           </div>
-                          <p>{msg.content}</p>
+                          <p className="wrap-break-word whitespace-pre-wrap">
+                            {msg.content}
+                          </p>
                           <p className="mt-1 text-right text-[10px] opacity-50">
                             {format(new Date(msg.createdAt), 'HH:mm')}
                           </p>

@@ -616,14 +616,14 @@ export const mockChatMessages: Message[] = [
   {
     id: 'c1',
     leadId: '1238109831092839012',
-    sender: MessageSender.LEAD,
+    sender: MessageSender.enum.LEAD,
     content: 'Ola, vi o anuncio do apartamento nos Jardins e tenho interesse.',
     createdAt: new Date('2026-02-24T09:00:00'),
   },
   {
     id: 'c2',
     leadId: '1238109831092839012',
-    sender: MessageSender.AI,
+    sender: MessageSender.enum.AI,
     content:
       'Ola Ana! Que bom saber do seu interesse. O apartamento tem 120m2, 3 suites e fica na Oscar Freire. Gostaria de agendar uma visita?',
     createdAt: new Date('2026-02-24T09:01:00'),
@@ -631,28 +631,28 @@ export const mockChatMessages: Message[] = [
   {
     id: 'c3',
     leadId: '1238109831092839012',
-    sender: MessageSender.LEAD,
+    sender: MessageSender.enum.LEAD,
     content: 'Sim! Pode ser sabado de manha?',
     createdAt: new Date('2026-02-24T09:05:00'),
   },
   {
     id: 'c4',
     leadId: '1238109831092839012',
-    sender: MessageSender.AI,
+    sender: MessageSender.enum.AI,
     content: 'Perfeito! Tenho horario as 10h ou 11h no sabado. Qual prefere?',
     createdAt: new Date('2026-02-24T09:06:00'),
   },
   {
     id: 'c5',
     leadId: '1238109831092839012',
-    sender: MessageSender.LEAD,
+    sender: MessageSender.enum.LEAD,
     content: '10h esta otimo!',
     createdAt: new Date('2026-02-24T09:10:00'),
   },
   {
     id: 'c6',
     leadId: '1238109831092839012',
-    sender: MessageSender.BROKER,
+    sender: MessageSender.enum.BROKER,
     content:
       'Ana, confirmo sua visita para sabado as 10h. Vou te enviar o endereco completo por WhatsApp. Ate la!',
     createdAt: new Date('2026-02-24T09:15:00'),
