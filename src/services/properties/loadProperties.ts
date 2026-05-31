@@ -8,7 +8,6 @@ export const loadPropertiesPage = async (
   page: number,
   search?: string,
 ): Promise<PaginatedResponses> => {
-  console.log('Buscando propriedades...')
   const propertiesPage = await trackPromise(
     api.get('/api/properties', {
       params: {

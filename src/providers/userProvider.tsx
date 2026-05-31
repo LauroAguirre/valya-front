@@ -81,16 +81,14 @@ export function UserProvider({
   }
 
   const login = async (email: string, password: string, redirect?: boolean) => {
-    console.log('aqui no login....')
     const authResult = await authenticate(email, password)
-    console.log({ authResult })
+
     if (authResult.user) {
       setCurrentUser(authResult.user)
       setCurrentPlan(authResult.plan)
       setPlanExpirationDate(authResult.planExpirationDate)
 
       if (authResult.user.role === UserRole.ADMIN) {
-        console.log(authResult.user)
         router.push('/admin/dashboard')
         return
       }

@@ -14,7 +14,5 @@ export const saveUserProfile = async (userFields: ProfileForm) => {
     })
     .catch(error => console.error(error))
 
-  console.log({ saved })
-
   return saved
 }

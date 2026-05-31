@@ -12,8 +12,6 @@ export const getEvolutionConnection = async (userId: string) => {
     'loadingEvolutionConnection',
   )
     .then((response: AxiosResponse<EvolutionConfig>) => {
-      console.log({ response })
-
       return response.data
     })
     .catch(error => {

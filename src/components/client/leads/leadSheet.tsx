@@ -33,10 +33,18 @@ export const LeadSheet = ({
   const [messages, setMessages] = useState<Message[]>([])
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
+  const [activeTab, setActiveTab] = useState('geral')
   const { promiseInProgress: loadingChat } = usePromiseTracker({
     area: 'loadingChatHistory',
   })
-  const bottomRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      const el = scrollRef.current
+      if (el) el.scrollTop = el.scrollHeight
+    }, 50)
+  }
 
   useEffect(() => {
     setMessages([])
@@ -51,7 +59,7 @@ export const LeadSheet = ({
       const result = await loadChatHistory({ page, leadId: lead.id as string })
       if (page === 1) {
         setMessages(result.data)
-        setTimeout(() => bottomRef.current?.scrollIntoView(), 50)
+        scrollToBottom()
       } else {
         setMessages(prev => [...result.data, ...prev])
       }
@@ -60,6 +68,12 @@ export const LeadSheet = ({
 
     fetchPage()
   }, [lead?.id, page])
+
+  // Rola para a mensagem mais recente sempre que a aba de chat for aberta,
+  // já que o conteúdo é montado apenas quando a aba fica ativa.
+  useEffect(() => {
+    if (activeTab === 'chat') scrollToBottom()
+  }, [activeTab, messages.length])
 
   const handleLoadMore = () => {
     setPage(prev => prev + 1)
@@ -76,7 +90,7 @@ export const LeadSheet = ({
         </SheetHeader>
 
         {lead && (
-          <Tabs defaultValue="geral" className="mt-4">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
             <TabsList className="w-full">
               <TabsTrigger value="geral" className="flex-1">
                 Geral
@@ -192,8 +206,9 @@ export const LeadSheet = ({
             </TabsContent>
 
             <TabsContent value="chat" className="mt-4">
-              <div className="flex h-[60vh] flex-col">
-                <div className="flex-1 overflow-auto">
+              <div className="flex h-[80vh] flex-col">
+                {/* <div className="flex h-[60vh] flex-col"> */}
+                <div ref={scrollRef} className="flex-1 overflow-auto">
                   {page < totalPages && (
                     <div className="flex justify-center py-2">
                       <Button
@@ -228,7 +243,7 @@ export const LeadSheet = ({
                               {msg.sender === MessageSender.enum.LEAD
                                 ? 'Lead'
                                 : msg.sender === MessageSender.enum.AI
-                                  ? 'IA Valya'
+                                  ? 'Aalya IA'
                                   : 'Você'}
                             </span>
                             {msg.channel === 'META' && (
@@ -247,7 +262,6 @@ export const LeadSheet = ({
                         </div>
                       </div>
                     ))}
-                    <div ref={bottomRef} />
                   </div>
                 </div>
 

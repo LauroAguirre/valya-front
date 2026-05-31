@@ -16,7 +16,5 @@ export const saveRealStateAgent = async (agentFields: UserForm) => {
       return undefined
     })
 
-  console.log({ saved })
-
   return saved
 }

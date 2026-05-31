@@ -217,7 +217,7 @@ export default function AiConfigsPage() {
       const conn = await getEvolutionConnection(
         ctxUser.currentUser?.id as string,
       )
-      console.log({ conn })
+
       setEvolution(conn ?? null)
     }
 
@@ -236,7 +236,7 @@ export default function AiConfigsPage() {
 
   const handleActivateIntegration = async () => {
     const result = await createEvolutionInstance()
-    console.log({ result })
+
     if (!result) {
       toast.error('Falha ao ativar a integração. Por favor, tente novamente.')
       return

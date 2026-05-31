@@ -30,6 +30,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { profileSchema, ProfileForm } from '@/schemas/profileSchema'
 import { useUserProvider } from '@/providers/userProvider'
 import { BRAZILIAN_STATES } from '@/lib/brazilianStates'
+import { saveUserProfile } from '@/services/user/saveUserProfile'
 
 export default function CompanyProfilePage() {
   const { currentUser } = useUserProvider()
@@ -79,8 +80,8 @@ export default function CompanyProfilePage() {
       : 'Sem data'
   }, [currentUser])
 
-  function handleSave(data: ProfileForm) {
-    console.log(data)
+  async function handleSave(data: ProfileForm) {
+    await saveUserProfile(data)
     toast.success('Perfil atualizado com sucesso!')
   }
 

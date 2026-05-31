@@ -14,7 +14,7 @@ import { Loader2, RefreshCw, Trash2, Upload } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { uploadPropertyImage } from '@/services/properties/uploadPropertyImage'
 
@@ -44,10 +44,6 @@ export const PropertyImagesTab = ({ form }: PropertyImagesTabProps) => {
     remove: removeImage,
   } = useFieldArray({ control: form.control, name: 'images' })
 
-  useEffect(() => {
-    console.log({ imageFields })
-  }, [imageFields])
-
   async function uploadFile(pending: PendingUpload) {
     if (!propertyId) return
 
@@ -57,7 +53,7 @@ export const PropertyImagesTab = ({ form }: PropertyImagesTabProps) => {
       appendImage({
         ...uploaded,
         description: uploaded.description ?? '',
-        createdAt: uploaded.createdAt ?? new Date(),
+        // createdAt: uploaded.createdAt ?? new Date(),
       })
       setPendingUploads(prev => prev.filter(p => p.id !== pending.id))
       URL.revokeObjectURL(pending.previewUrl)

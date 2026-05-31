@@ -84,8 +84,6 @@ export function RegisterStepTwo({
     const phone = onlyDigits(fields.phone)
     const postalCode = onlyDigits(fields.postalCode)
 
-    console.log({ cpfCnpj, phone, postalCode })
-
     const payload: ActivateAgentPayload = {
       cpfCnpj,
       phone: phone || undefined,
@@ -112,8 +110,6 @@ export function RegisterStepTwo({
         phone,
       }
     }
-
-    console.log({ payload })
 
     const result = await activateAgentSubscription(payload, token)
 

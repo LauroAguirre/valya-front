@@ -6,7 +6,6 @@ import { EvolutionConfig } from '@/schemas/evolutionConfigSchema'
 export const createEvolutionInstance = async (): Promise<
   EvolutionConfig | undefined
 > => {
-  console.log('creatingEvolutionInstance')
   return trackPromise(
     api.post('api/evolution/instance', {}, { withCredentials: true }),
     'creatingEvolutionInstance',

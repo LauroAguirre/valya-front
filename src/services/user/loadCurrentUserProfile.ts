@@ -8,7 +8,6 @@ import { Plan } from '@/schemas/planSchema'
 export const loadCurrentUserProfile = async () => {
   try {
     const { 'valya-auth': authToken } = parseCookies()
-    console.log({ authToken })
     if (authToken) {
       const currentUser = await trackPromise(
         api.get('api/user/profile', { withCredentials: true }),

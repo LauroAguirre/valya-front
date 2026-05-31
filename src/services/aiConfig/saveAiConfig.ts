@@ -4,7 +4,6 @@ import api from '../api/backendApi'
 import { AxiosResponse } from 'axios'
 
 export const saveAiConfig = async (promptFields: AiConfigForm) => {
-  console.log({ promptFields })
   const config = await trackPromise(
     api.post('api/ai-config/', promptFields, { withCredentials: true }),
     'savingAiConfig',
