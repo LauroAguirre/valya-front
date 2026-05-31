@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { io, Socket } from 'socket.io-client'
 import { parseCookies } from 'nookies'
 import {
@@ -218,6 +218,7 @@ export default function AiConfigsPage() {
       const conn = await getEvolutionConnection(
         ctxUser.currentUser?.id as string,
       )
+      console.log({ conn })
       setEvolution(conn ?? null)
     }
 
@@ -298,7 +299,11 @@ export default function AiConfigsPage() {
 
   const onInvalid = (errors: unknown) => console.error(errors)
 
-  const connState = getConnectionState(evolution)
+  const connState = useMemo(() => {
+    const status = getConnectionState(evolution)
+    return status
+  }, [evolution])
+
   const isQrVisible = !!qrCode
   const isActionDisabled = isCreatingInstance || isGeneratingQrCode
 
