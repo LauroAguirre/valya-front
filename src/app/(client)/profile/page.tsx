@@ -17,11 +17,19 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Camera, Save } from 'lucide-react'
 import { toast } from 'sonner'
 import { Toaster } from '@/components/ui/sonner'
 import { profileSchema, ProfileForm } from '@/schemas/profileSchema'
 import { useUserProvider } from '@/providers/userProvider'
+import { BRAZILIAN_STATES } from '@/lib/brazilianStates'
 
 export default function PerfilPage() {
   const { currentUser } = useUserProvider()
@@ -109,7 +117,7 @@ export default function PerfilPage() {
                 <div className="flex justify-between py-2">
                   <span className="text-muted-foreground">CRECI</span>
                   <span className="text-foreground">
-                    {form.watch('creci') ?? ''}
+                    {form.watch('creci') ?? ''}/{form.watch('uf') ?? ''}
                   </span>
                 </div>
                 <div className="flex justify-between py-2">
@@ -189,6 +197,33 @@ export default function PerfilPage() {
                         <FormControl>
                           <Input {...field} value={field.value ?? ''} />
                         </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="uf"
+                    render={({ field }) => (
+                      <FormItem className="w-24 shrink-0">
+                        <FormLabel>UF</FormLabel>
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="UF" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {BRAZILIAN_STATES.map(uf => (
+                              <SelectItem key={uf} value={uf}>
+                                {uf}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}

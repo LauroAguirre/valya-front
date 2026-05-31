@@ -23,8 +23,10 @@ import { loadPropertiesPage } from '@/services/properties/loadProperties'
 import { optOutProperty } from '@/services/properties/optOutProperty'
 import { usePromiseTracker } from 'react-promise-tracker'
 import { Spinner } from '@/components/ui/spinner'
+import { useRouter } from 'next/navigation'
 
 export default function PropertiesPage() {
+  const router = useRouter()
   const [search, setSearch] = useState('')
   const [properties, setProperties] = useState<Property[]>([])
   const { promiseInProgress: loadingProperties } = usePromiseTracker({
@@ -128,15 +130,19 @@ export default function PropertiesPage() {
             {filtered.map(property => (
               <TableRow
                 key={property.id}
-                className="border-border hover:bg-secondary/50"
+                className="border-border hover:bg-secondary/50 hover:cursor-pointer hover:text-white"
+                onClick={() => {
+                  if (!property.id) return
+
+                  router.push(`/properties/${property.id}`)
+                }}
               >
+                {/* <Link
+                  href={`/properties/${property.id}`}
+                  className="text-foreground hover:text-primary font-medium"
+                > */}
                 <TableCell>
-                  <Link
-                    href={`/properties/${property.id}`}
-                    className="text-foreground hover:text-primary font-medium"
-                  >
-                    {property.name}
-                  </Link>
+                  {property.name}
                   {property.units && property.units.length > 1 && (
                     <Badge variant="secondary" className="ml-2 text-[10px]">
                       Multiplas unid.
@@ -148,35 +154,35 @@ export default function PropertiesPage() {
                     </Badge>
                   )}
                 </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {property.bedrooms || '-'}
-                </TableCell>
-                <TableCell className="text-muted-foreground">
+                <TableCell>{property.bedrooms || '-'}</TableCell>
+                <TableCell>
                   {property.neighborhood}, {property.city}
                 </TableCell>
-                <TableCell className="text-foreground text-right">
+                <TableCell className="text-right">
                   {property.totalPrice
                     ? formatCurrency(property.totalPrice)
                     : 'Consultar'}
                 </TableCell>
                 <TableCell />
-                {hasConstructorProperties && (
-                  <TableCell className="text-center">
-                    {property.companyId ? (
-                      <Switch
-                        checked={!property.optedOut}
-                        onCheckedChange={checked =>
-                          handleOptOut(property, checked)
-                        }
-                        aria-label={
-                          property.optedOut
-                            ? 'Reativar imóvel'
-                            : 'Ocultar imóvel'
-                        }
-                      />
-                    ) : null}
-                  </TableCell>
-                )}
+                <TableCell className="text-center">
+                  {hasConstructorProperties && (
+                    <>
+                      {property.companyId ? (
+                        <Switch
+                          checked={!property.optedOut}
+                          onCheckedChange={checked =>
+                            handleOptOut(property, checked)
+                          }
+                          aria-label={
+                            property.optedOut
+                              ? 'Reativar imóvel'
+                              : 'Ocultar imóvel'
+                          }
+                        />
+                      ) : null}
+                    </>
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

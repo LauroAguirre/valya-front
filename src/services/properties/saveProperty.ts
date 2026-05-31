@@ -2,7 +2,7 @@ import { trackPromise } from 'react-promise-tracker'
 import { Property } from '../../schemas/propertySchema'
 import api from '../api/backendApi'
 import { AxiosResponse } from 'axios'
-import { PropertyFields } from '../../app/(client)/imoveis/[id]/page'
+import { PropertyFields } from '../../app/(client)/properties/[id]/page'
 
 export const saveProperty = async (data: PropertyFields) => {
   const property = await trackPromise(

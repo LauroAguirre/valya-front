@@ -39,7 +39,7 @@ const formSchema = propertySchema
     path: ['name'],
   })
 
-export type PropertyFormValues = z.input<typeof formSchema>
+export type PropertyFields = z.input<typeof formSchema>
 
 export default function ImovelDetailPage({
   params,
@@ -51,7 +51,7 @@ export default function ImovelDetailPage({
 
   const [property, setProperty] = useState<Property | undefined>(undefined)
 
-  const form = useForm<PropertyFormValues>({
+  const form = useForm<PropertyFields>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       id: undefined,
@@ -70,8 +70,8 @@ export default function ImovelDetailPage({
       type: undefined,
       neighborhood: undefined,
       city: undefined,
-      createdAt: undefined,
-      updatedAt: undefined,
+      // createdAt: undefined,
+      // updatedAt: undefined,
       deletedAt: undefined,
       totalPrice: undefined,
       minDown: undefined,
@@ -105,17 +105,17 @@ export default function ImovelDetailPage({
             bbqType: details.bbqType ?? BbqType.NONE,
             images: details.images ?? [],
             adLinks: details.adLinks ?? [],
-            createdAt: new Date(details.createdAt),
-            updatedAt: details.updatedAt
-              ? new Date(details.updatedAt)
-              : undefined,
+            // createdAt: new Date(details.createdAt),
+            // updatedAt: details.updatedAt
+            //   ? new Date(details.updatedAt)
+            //   : undefined,
           })
         }
       })
     }
   }, [id])
 
-  const save = async (fields: PropertyFormValues) => {
+  const save = async (fields: PropertyFields) => {
     fields.userId = ctxUser.currentUser?.id
     const newProperty = await saveProperty(fields)
     if (newProperty?.id) {
@@ -133,7 +133,7 @@ export default function ImovelDetailPage({
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4">
         <Button variant="ghost" size="icon" asChild>
-          <Link href="/imoveis">
+          <Link href="/properties">
             <ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
@@ -153,9 +153,15 @@ export default function ImovelDetailPage({
           <Tabs defaultValue="general" className="w-full">
             <TabsList className="w-full justify-start">
               <TabsTrigger value="general">Cadastro Geral</TabsTrigger>
-              <TabsTrigger value="financial">Financeiro</TabsTrigger>
-              <TabsTrigger value="ads">Anúncios</TabsTrigger>
-              <TabsTrigger value="imagens">Imagens</TabsTrigger>
+              <TabsTrigger value="financial" disabled={!property}>
+                Financeiro
+              </TabsTrigger>
+              <TabsTrigger value="ads" disabled={!property}>
+                Anúncios
+              </TabsTrigger>
+              <TabsTrigger value="imagens" disabled={!property}>
+                Imagens
+              </TabsTrigger>
             </TabsList>
 
             {/* ---- ABA GERAL ---- */}

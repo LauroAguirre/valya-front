@@ -199,11 +199,11 @@ Relations: subscription, properties, leads, aiConfig, evolutionConfig, asaasCust
 
 ### Client (Agent) Area
 - `/dashboard` — KPI cards (total leads, active leads, properties, conversions) + Recharts bar chart
-- `/imoveis` — Property listing with search and pagination
-- `/imoveis/[id]` — Property detail with tabs: general info, units, images, ad links
-- `/esteira` — Sales pipeline: Kanban board with lead cards, stage progression, and embedded chat panel
-- `/configuracao-ia` — AI assistant configuration (custom system prompt) + Evolution API (WhatsApp) QR code connection
-- `/perfil` — User profile editing: name, email, phone, CRECI, CNPJ
+- `/properties` — Property listing with search and pagination
+- `/properties/[id]` — Property detail with tabs: general info, units, images, ad links
+- `/pipeline` — Sales pipeline: Kanban board with lead cards, stage progression, and embedded chat panel
+- `/ia-config` — AI assistant configuration (custom system prompt) + Evolution API (WhatsApp) QR code connection
+- `/profile` — User profile editing: name, email, phone, CRECI, CNPJ
 
 ### Admin Area
 - `/admin/dashboard` — System-wide KPIs and revenue charts

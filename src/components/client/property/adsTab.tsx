@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/form'
 import { useFieldArray, UseFormReturn } from 'react-hook-form'
 
-import { PropertyFields } from '@/app/(client)/imoveis/[id]/page'
+import { PropertyFields } from '@/app/(client)/properties/[id]/page'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Property } from '@/schemas/propertySchema'
 import { ExternalLink, Plus, Trash2 } from 'lucide-react'

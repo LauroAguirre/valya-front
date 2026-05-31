@@ -7,7 +7,7 @@ export const propertyImageSchema = z.object({
   url: z.string().nullish(),
   description: z.string().nullish(),
   order: z.number().nullish(),
-  createdAt: z.date().default(new Date()),
+  // createdAt: z.date().default(new Date()),
 })
 
 export type PropertyImage = z.infer<typeof propertyImageSchema> & {

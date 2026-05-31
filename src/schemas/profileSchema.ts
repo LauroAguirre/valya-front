@@ -5,6 +5,7 @@ export const profileSchema = z.object({
   email: z.string().email('Informe um e-mail válido.'),
   phone: z.string().nullish(),
   creci: z.string().nullish(),
+  uf: z.string().optional(),
   agency: z.string().nullish(),
   bio: z.string().nullish(),
 })

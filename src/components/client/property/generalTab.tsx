@@ -8,7 +8,7 @@ import {
 import { UseFormReturn } from 'react-hook-form'
 
 import { Card, CardContent } from '../../ui/card'
-import { PropertyFields } from '@/app/(client)/imoveis/[id]/page'
+import { PropertyFields } from '@/app/(client)/properties/[id]/page'
 import { BbqType, GarageType } from '@/schemas/propertySchema'
 import { InputNumber } from '../../ui/inputNumber'
 import { InputSelect } from '../../inputs/inputSelect'
@@ -20,10 +20,18 @@ interface PropertyGeneralTabProps {
 }
 
 export const PropertyGeneralTab = ({ form }: PropertyGeneralTabProps) => {
+  const propertyId = form.watch('id')
   return (
     <Card className="border-border bg-card">
       <CardContent className="pt-6">
         <div className="grid gap-4 sm:grid-cols-2">
+          {(!propertyId || propertyId.length < 2) && (
+            <div className="flex rounded-md border border-amber-600 bg-amber-400/40 px-4 py-1 text-sm text-orange-500 sm:col-span-2">
+              <span>
+                Salve os dados do imóvel para habilitar as outras abas.
+              </span>
+            </div>
+          )}
           <div className="flex flex-col gap-2 sm:col-span-2">
             <FormField
               control={form.control}
