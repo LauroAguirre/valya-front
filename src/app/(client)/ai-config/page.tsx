@@ -190,7 +190,6 @@ export default function AiConfigsPage() {
     })
 
     socket.on('qr_code_v2', (data: { qrcode: { base64: string } }) => {
-      console.log({ data })
       setQrCode(data.qrcode.base64)
     })
 

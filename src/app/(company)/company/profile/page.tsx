@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+// import { Textarea } from '@/components/ui/textarea'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -42,8 +42,10 @@ export default function CompanyProfilePage() {
       phone: '',
       creci: '',
       uf: '',
-      agency: '',
-      bio: '',
+      site: '',
+      city: '',
+      // agency: '',
+      // bio: '',
     },
   })
 
@@ -55,8 +57,10 @@ export default function CompanyProfilePage() {
       phone: currentUser.phone ?? '',
       creci: currentUser.realStateAgent?.creci ?? '',
       uf: currentUser.realStateAgent?.uf ?? '',
-      agency: '',
-      bio: '',
+      site: '',
+      city: '',
+      // agency: '',
+      // bio: '',
     })
   }, [currentUser, form])
 
@@ -70,7 +74,6 @@ export default function CompanyProfilePage() {
     .join('')
 
   const memberSince = useMemo(() => {
-    console.log({ currentUser })
     return currentUser?.createdAt
       ? new Date(currentUser.createdAt).toLocaleDateString('pt-BR')
       : 'Sem data'
@@ -232,6 +235,32 @@ export default function CompanyProfilePage() {
                   />
                   <FormField
                     control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Cidade</FormLabel>
+                        <FormControl>
+                          <Input {...field} value={field.value ?? ''} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="site"
+                    render={({ field }) => (
+                      <FormItem className="sm:col-span-2">
+                        <FormLabel>Site</FormLabel>
+                        <FormControl>
+                          <Input {...field} value={field.value ?? ''} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {/* <FormField
+                    control={form.control}
                     name="agency"
                     render={({ field }) => (
                       <FormItem>
@@ -260,7 +289,7 @@ export default function CompanyProfilePage() {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                  /> */}
                 </div>
               </CardContent>
             </Card>

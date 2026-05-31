@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -30,6 +29,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { profileSchema, ProfileForm } from '@/schemas/profileSchema'
 import { useUserProvider } from '@/providers/userProvider'
 import { BRAZILIAN_STATES } from '@/lib/brazilianStates'
+import { saveUserProfile } from '@/services/user/saveUserProfile'
 
 export default function PerfilPage() {
   const { currentUser } = useUserProvider()
@@ -37,24 +37,32 @@ export default function PerfilPage() {
   const form = useForm<ProfileForm>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
+      id: '',
       name: '',
       email: '',
       phone: '',
       creci: '',
-      agency: '',
-      bio: '',
+      uf: '',
+      site: '',
+      city: '',
+      // agency: '',
+      // bio: '',
     },
   })
 
   useEffect(() => {
     if (!currentUser) return
     form.reset({
+      id: currentUser.id ?? '',
       name: currentUser.name ?? '',
       email: currentUser.email ?? '',
       phone: currentUser.phone ?? '',
       creci: currentUser.realStateAgent?.creci ?? '',
-      agency: '',
-      bio: '',
+      uf: currentUser.realStateAgent?.uf ?? '',
+      site: '',
+      city: '',
+      // agency: '',
+      // bio: '',
     })
   }, [currentUser, form])
 
@@ -68,14 +76,13 @@ export default function PerfilPage() {
     .join('')
 
   const memberSince = useMemo(() => {
-    console.log({ currentUser })
     return currentUser?.createdAt
       ? new Date(currentUser.createdAt).toLocaleDateString('pt-BR')
       : 'Sem data'
   }, [currentUser])
 
-  function handleSave(data: ProfileForm) {
-    console.log(data)
+  async function handleSave(data: ProfileForm) {
+    await saveUserProfile(data)
     toast.success('Perfil atualizado com sucesso!')
   }
 
@@ -230,6 +237,32 @@ export default function PerfilPage() {
                   />
                   <FormField
                     control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Cidade</FormLabel>
+                        <FormControl>
+                          <Input {...field} value={field.value ?? ''} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="site"
+                    render={({ field }) => (
+                      <FormItem className="sm:col-span-2">
+                        <FormLabel>Site</FormLabel>
+                        <FormControl>
+                          <Input {...field} value={field.value ?? ''} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {/* <FormField
+                    control={form.control}
                     name="agency"
                     render={({ field }) => (
                       <FormItem>
@@ -258,7 +291,7 @@ export default function PerfilPage() {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                  /> */}
                 </div>
               </CardContent>
             </Card>

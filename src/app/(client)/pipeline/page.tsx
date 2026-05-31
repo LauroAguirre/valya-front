@@ -57,7 +57,6 @@ export default function EsteiraPage() {
   })
 
   const kanbanColumns = useMemo(() => {
-    console.log({ activeLeads })
     const columns: KanbanColumn[] = [
       {
         id: 'qualification',
@@ -113,7 +112,6 @@ export default function EsteiraPage() {
     const loadLeads = async () => {
       const leads = await loadActiveLeads(ctxUser.currentUser?.id as string)
 
-      console.log({ leads })
       setActiveLeads(leads)
     }
 
