@@ -84,7 +84,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <Button asChild>
-          <Link href="/configuracao-ia">
+          <Link href="/ai-config">
             <Bot className="mr-2 h-4 w-4" />
             Configuração da IA
           </Link>

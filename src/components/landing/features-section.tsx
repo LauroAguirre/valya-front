@@ -99,6 +99,36 @@ export function FeaturesSection() {
             )
           })}
         </ul>
+
+        {/* Demonstração em vídeo do atendimento da IA */}
+        <div className="mx-auto mt-16 max-w-3xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <h3 className="text-foreground text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+              Veja a IA em ação com um{' '}
+              <span className="text-brand-orange">lead real</span>
+            </h3>
+            <p className="text-muted-foreground mt-3 text-base leading-relaxed text-pretty">
+              Uma etapa do atendimento automático: a IA conversa, qualifica e
+              conduz o lead pela jornada de compra no WhatsApp.
+            </p>
+          </div>
+
+          <div className="border-border bg-card mt-8 overflow-hidden rounded-xl border shadow-md">
+            <video
+              className="aspect-video h-auto w-full"
+              src="/demo.mp4"
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="Demonstração do atendimento da IA com um lead"
+            >
+              Seu navegador não suporta a reprodução de vídeo.
+            </video>
+          </div>
+        </div>
       </div>
     </section>
   )
