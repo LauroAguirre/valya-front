@@ -65,7 +65,7 @@ export const propertySchema = z.object({
   paymentOptions: z.string().nullish(),
 })
 
-export type PropertyForm = z.infer<typeof propertySchema>
+export type PropertyForm = z.input<typeof propertySchema>
 
 export type Property = PropertyForm & {
   user?: User

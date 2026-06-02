@@ -11,13 +11,14 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Lead } from '@/schemas/leadSchema'
 import { format } from 'date-fns'
 import { Label } from '@/components/ui/label'
-import { Building2, ChevronUp, Phone, Zap } from 'lucide-react'
+import { ChevronUp, Phone, Zap } from 'lucide-react'
 import { Switch } from '@/components/ui/switch'
 import { Message, MessageSender } from '@/schemas/messageSchema'
 import { useEffect, useRef, useState } from 'react'
 import { loadChatHistory } from '@/services/lead/loadChatHistory'
 import { usePromiseTracker } from 'react-promise-tracker'
 import { Button } from '@/components/ui/button'
+import { NegotiationsTab } from './negotiationsTab'
 
 interface LeadSheetProps {
   sheetOpen: boolean
@@ -95,6 +96,9 @@ export const LeadSheet = ({
               <TabsTrigger value="geral" className="flex-1">
                 Geral
               </TabsTrigger>
+              <TabsTrigger value="negociacoes" className="flex-1">
+                Negociações
+              </TabsTrigger>
               <TabsTrigger value="chat" className="flex-1">
                 Atendimento
               </TabsTrigger>
@@ -165,23 +169,6 @@ export const LeadSheet = ({
                   </div>
                 </div>
 
-                {lead.properties && lead.properties.length > 0 && (
-                  <div className="border-border rounded-lg border p-4">
-                    <Label className="text-muted-foreground text-xs">
-                      Empreendimento em negociação
-                    </Label>
-                    <hr />
-                    {lead.properties.map(property => {
-                      return (
-                        <p className="text-foreground mt-1 flex items-center gap-2 text-sm">
-                          <Building2 className="text-muted-foreground h-4 w-4" />
-                          {property.name}
-                        </p>
-                      )
-                    })}
-                  </div>
-                )}
-
                 {/* {lead.propertyTitle && (
                     <div className="border-border rounded-lg border p-4">
                       <Label className="text-muted-foreground text-xs">
@@ -203,6 +190,10 @@ export const LeadSheet = ({
                   </div>
                 )}
               </div>
+            </TabsContent>
+
+            <TabsContent value="negociacoes" className="mt-4">
+              {lead.id && <NegotiationsTab leadId={lead.id} />}
             </TabsContent>
 
             <TabsContent value="chat" className="mt-4">

@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { Property } from './propertySchema'
 import { User } from './userSchema'
 import { Message } from './messageSchema'
+import type { Negotiation } from './negotiationSchema'
 
 export enum LeadOrigin {
   FACEBOOK = 'FACEBOOK',
@@ -29,7 +29,6 @@ export const leadSchema = z.object({
   phone: z.string().nullish(),
   email: z.string().nullish(),
   origin: z.enum(LeadOrigin).default(LeadOrigin.WHATSAPP),
-  stage: z.enum(LeadStage).default(LeadStage.QUALIFICATION),
   aiEnabled: z.boolean().default(true),
   notes: z.string().nullish(),
   lastReplyAt: z.date().nullish(),
@@ -42,5 +41,9 @@ export type LeadForm = z.infer<typeof leadSchema>
 export type Lead = LeadForm & {
   user?: User
   messages?: Message[]
-  properties?: Property[]
+  // A etapa do funil e os imóveis de interesse vivem na NEGOCIAÇÃO agora.
+  // `activeNegotiation` é a negociação OPEN (ou null se o lead não tem nenhuma).
+  // `negotiations` (preenchido no detalhe) traz ativa + histórico de fechadas.
+  activeNegotiation?: Negotiation | null
+  negotiations?: Negotiation[]
 }

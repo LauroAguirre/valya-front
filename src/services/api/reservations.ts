@@ -3,12 +3,17 @@ import { AxiosResponse } from 'axios'
 import api from './backendApi'
 import { Reservation } from '@/schemas/reservationSchema'
 
-export const requestReservation = async (unitId: string, notes?: string) => {
+export const requestReservation = async (
+  unitId: string,
+  notes?: string,
+  leadId?: string,
+) => {
   return trackPromise(
     api
       .post<Reservation>(
         '/api/reservations',
-        { unitId, notes },
+        // Quando leadId é enviado, a reserva é vinculada à negociação aberta do lead.
+        { unitId, notes, leadId },
         { withCredentials: true },
       )
       .then((res: AxiosResponse<Reservation>) => res.data)

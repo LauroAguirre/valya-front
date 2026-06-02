@@ -21,6 +21,8 @@ interface Props {
   open: boolean
   onOpenChange: (open: boolean) => void
   unit: PropertyUnit
+  // Quando a reserva é criada a partir de um lead, vincula-a à negociação aberta.
+  leadId?: string
   onSuccess?: () => void
 }
 
@@ -28,6 +30,7 @@ export function RequestReservationModal({
   open,
   onOpenChange,
   unit,
+  leadId,
   onSuccess,
 }: Props) {
   const [notes, setNotes] = useState('')
@@ -37,7 +40,11 @@ export function RequestReservationModal({
 
   async function handleSubmit() {
     if (!unit.id) return
-    const result = await requestReservation(unit.id, notes.trim() || undefined)
+    const result = await requestReservation(
+      unit.id,
+      notes.trim() || undefined,
+      leadId,
+    )
     if (result) {
       toast.success('Solicitação de reserva enviada!')
       setNotes('')

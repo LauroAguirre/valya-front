@@ -57,43 +57,52 @@ export default function EsteiraPage() {
   })
 
   const kanbanColumns = useMemo(() => {
+    // Cada card do funil é uma NEGOCIAÇÃO ativa de um lead. A etapa vive em
+    // lead.activeNegotiation.stage. Leads sem negociação aberta não aparecem
+    // aqui (só na lista de contatos).
+    const negotiatingLeads = activeLeads.filter(l => !!l.activeNegotiation)
+    const byStage = (stage: LeadStage) =>
+      negotiatingLeads.filter(l => l.activeNegotiation?.stage === stage)
+
     const columns: KanbanColumn[] = [
       {
         id: 'qualification',
         title: 'Qualificação',
         color: 'bg-[#6366f1]',
-        cards: activeLeads.filter(l => l.stage === LeadStage.QUALIFICATION),
+        cards: byStage(LeadStage.QUALIFICATION),
       },
       {
         id: 'cadence',
         title: 'Cadência & Alimentação',
         color: 'bg-[#f59e0b]',
-        cards: activeLeads.filter(l => l.stage === LeadStage.CADENCE),
+        cards: byStage(LeadStage.CADENCE),
       },
       {
         id: 'visitation',
         title: 'Visita',
         color: 'bg-[#06b6d4]',
-        cards: activeLeads.filter(l => l.stage === LeadStage.VISITATION),
+        cards: byStage(LeadStage.VISITATION),
       },
       {
         id: 'proposal',
         title: 'Proposta',
         color: 'bg-[#10b981]',
-        cards: activeLeads.filter(l => l.stage === LeadStage.PROPOSAL),
+        cards: byStage(LeadStage.PROPOSAL),
       },
       {
         id: 'contract',
         title: 'Contrato',
         color: 'bg-[#8b5cf6]',
-        cards: activeLeads.filter(l => l.stage === LeadStage.CONTRACT),
+        cards: byStage(LeadStage.CONTRACT),
       },
       {
         id: 'results',
         title: 'Ganho / Perda',
         color: 'bg-[#737373]',
-        cards: activeLeads.filter(
-          l => l.stage === LeadStage.WIN || l.stage === LeadStage.LOSS,
+        cards: negotiatingLeads.filter(
+          l =>
+            l.activeNegotiation?.stage === LeadStage.WIN ||
+            l.activeNegotiation?.stage === LeadStage.LOSS,
         ),
       },
     ]
@@ -155,14 +164,17 @@ export default function EsteiraPage() {
                     <p className="text-card-foreground text-sm font-semibold">
                       {lead.name}
                     </p>
-                    {lead.properties && lead.properties.length > 0 && (
-                      <p className="text-muted-foreground mt-1 flex items-center gap-1 text-xs">
-                        <Building2 className="h-3 w-3 shrink-0" />
-                        <span className="truncate">
-                          {lead.properties?.map(prop => prop.name).join(', ')}
-                        </span>
-                      </p>
-                    )}
+                    {lead.activeNegotiation?.properties &&
+                      lead.activeNegotiation.properties.length > 0 && (
+                        <p className="text-muted-foreground mt-1 flex items-center gap-1 text-xs">
+                          <Building2 className="h-3 w-3 shrink-0" />
+                          <span className="truncate">
+                            {lead.activeNegotiation.properties
+                              .map(p => p.property.name)
+                              .join(', ')}
+                          </span>
+                        </p>
+                      )}
                     <p className="text-muted-foreground mt-2 flex items-center gap-1 text-[10px]">
                       <Calendar className="h-3 w-3" />
                       Ultima resposta:{' '}

@@ -1,5 +1,9 @@
 import Link from 'next/link'
 import { Check, Sparkles } from 'lucide-react'
+import { loadAgentsCount } from '@/services/agents/loadAgentsCount'
+
+// Quantidade base somada à contagem real de corretores cadastrados.
+const USER_COUNT_OFFSET = 20
 
 // const freeFeatures = [
 //   'Até 50 leads/mês qualificados pela IA',
@@ -17,7 +21,10 @@ const premiumFeatures = [
   'Exclusivo para corretores de imóveis',
 ]
 
-export function PricingSection() {
+export async function PricingSection() {
+  const agentsCount = await loadAgentsCount()
+  const displayCount = (agentsCount ?? 0) + USER_COUNT_OFFSET
+
   return (
     <section
       id="precos"
@@ -44,7 +51,9 @@ export function PricingSection() {
             corretores de imóveis.
           </p> */}
           <p className="mt-4">
-            <strong className="text-2xl">Usuários atuais (23/100)</strong>
+            <strong className="text-2xl">
+              Usuários atuais ({displayCount}/100)
+            </strong>
           </p>
         </div>
 

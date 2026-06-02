@@ -59,8 +59,7 @@ const unitStatusConfig: Record<
   },
   [PropertyUnitStatus.SOLD]: {
     label: 'Vendido',
-    className:
-      'border-red-500/30 bg-red-500/20 text-red-700 dark:text-red-400',
+    className: 'border-red-500/30 bg-red-500/20 text-red-700 dark:text-red-400',
   },
 }
 
@@ -293,19 +292,15 @@ export const PropertyFinancialTab = ({
                               : '-'}
                           </TableCell>
                           <TableCell>
-                            <Badge
-                              variant="outline"
-                              className={className}
-                            >
+                            <Badge variant="outline" className={className}>
                               {label}
                             </Badge>
                           </TableCell>
                           <TableCell className="text-muted-foreground text-sm">
-                            {expiry ?? (
-                              status === PropertyUnitStatus.RESERVED
+                            {expiry ??
+                              (status === PropertyUnitStatus.RESERVED
                                 ? 'Aguardando'
-                                : '—'
-                            )}
+                                : '—')}
                           </TableCell>
                           <TableCell>
                             {status === PropertyUnitStatus.AVAILABLE && (
@@ -313,9 +308,7 @@ export const PropertyFinancialTab = ({
                                 type="button"
                                 size="sm"
                                 variant="outline"
-                                onClick={() =>
-                                  handleRequestReservation(unit)
-                                }
+                                onClick={() => handleRequestReservation(unit)}
                               >
                                 Solicitar reserva
                               </Button>

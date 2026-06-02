@@ -220,11 +220,7 @@ export function DevelopmentFormModal({
                   <FormItem className="sm:col-span-2">
                     <FormLabel>Descrição</FormLabel>
                     <FormControl>
-                      <Textarea
-                        {...field}
-                        value={field.value ?? ''}
-                        rows={3}
-                      />
+                      <Textarea {...field} value={field.value ?? ''} rows={3} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
