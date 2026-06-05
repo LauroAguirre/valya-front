@@ -150,8 +150,15 @@ className={cn('base-classes', condition && 'conditional-class', className)}
 - Primary color: `#FF6600` (orange), exposed as `--primary`
 - Class sorting is enforced by `prettier-plugin-tailwindcss` — run Prettier before committing
 
-### Responsive design
-Breakpoints follow Tailwind defaults. Mobile-first: base styles target mobile, `sm:` and `lg:` override for larger viewports. Use the `useMobile()` hook for JS-side breakpoint detection.
+### Responsive design — MOBILE-FIRST IS MANDATORY
+**Rule: every new screen, component, or layout MUST be designed mobile-first.** Corretores work from their phones, so the mobile experience is not optional. This is a hard requirement, not a nice-to-have.
+
+- Write base (unprefixed) classes for the smallest viewport first, then add `sm:` / `md:` / `lg:` overrides to scale **up** — never the reverse. A component that only looks right above `md:` is considered broken.
+- Multi-column grids start at a single column on mobile: `grid gap-4 sm:grid-cols-2 lg:grid-cols-3` (never a bare `grid-cols-2`).
+- Wide content (tables, kanban boards, tab strips) must scroll horizontally inside an `overflow-x-auto` container instead of overflowing the viewport.
+- Tap targets and spacing must stay usable on touch; reduce padding on mobile (`p-4 md:p-6`) rather than shipping desktop padding everywhere.
+- Anything fixed to the desktop sidebar must remain reachable on mobile (the sidebar collapses into a `Sheet` opened by `SidebarTrigger` — keep that trigger present in mobile headers).
+- Breakpoints follow Tailwind defaults. Use the `useMobile()` hook for JS-side breakpoint detection. Verify new work at a ~375px viewport before considering it done.
 
 ### Reusable components
 Domain-specific reusable components go in `components/client/` or `components/admin/` (not in `components/ui/`). Generic cross-area components go in `components/generic/`.

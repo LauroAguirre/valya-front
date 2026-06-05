@@ -9,16 +9,42 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 import { Lead } from '@/schemas/leadSchema'
-import { format } from 'date-fns'
+import { format, isSameDay, isToday, isYesterday } from 'date-fns'
 import { Label } from '@/components/ui/label'
 import { ChevronUp, Phone, Zap } from 'lucide-react'
 import { Switch } from '@/components/ui/switch'
 import { Message, MessageSender } from '@/schemas/messageSchema'
-import { useEffect, useRef, useState } from 'react'
+import {
+  Fragment,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { loadChatHistory } from '@/services/lead/loadChatHistory'
 import { usePromiseTracker } from 'react-promise-tracker'
 import { Button } from '@/components/ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Negotiation } from '@/schemas/negotiationSchema'
+import { loadLeadNegotiations } from '@/services/negotiation/loadLeadNegotiations'
 import { NegotiationsTab } from './negotiationsTab'
+
+// Valor do filtro de conversa que mostra a thread completa do lead.
+const ALL_MESSAGES = 'all'
+
+// Rótulo do separador de dia exibido entre blocos de mensagens.
+function formatDayLabel(date: Date) {
+  if (isToday(date)) return 'Hoje'
+  if (isYesterday(date)) return 'Ontem'
+  return format(date, 'dd/MM/yyyy')
+}
 
 interface LeadSheetProps {
   sheetOpen: boolean
@@ -35,10 +61,17 @@ export const LeadSheet = ({
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [activeTab, setActiveTab] = useState('geral')
+  const [negotiations, setNegotiations] = useState<Negotiation[]>([])
+  // Filtro da aba de conversa: ALL_MESSAGES mostra a thread completa do lead;
+  // um id de negociação mostra só as mensagens daquele ciclo de compra.
+  const [conversationFilter, setConversationFilter] = useState(ALL_MESSAGES)
   const { promiseInProgress: loadingChat } = usePromiseTracker({
     area: 'loadingChatHistory',
   })
   const scrollRef = useRef<HTMLDivElement>(null)
+  // Altura do scroll capturada antes de prepender mensagens antigas, usada
+  // para manter a posição de leitura ao clicar em "Carregar mais".
+  const prependAnchorRef = useRef<number | null>(null)
 
   const scrollToBottom = () => {
     setTimeout(() => {
@@ -51,6 +84,9 @@ export const LeadSheet = ({
     setMessages([])
     setPage(1)
     setTotalPages(1)
+    setConversationFilter(ALL_MESSAGES)
+    setNegotiations([])
+    if (lead?.id) loadLeadNegotiations(lead.id).then(setNegotiations)
   }, [lead?.id])
 
   useEffect(() => {
@@ -70,13 +106,33 @@ export const LeadSheet = ({
     fetchPage()
   }, [lead?.id, page])
 
-  // Rola para a mensagem mais recente sempre que a aba de chat for aberta,
-  // já que o conteúdo é montado apenas quando a aba fica ativa.
+  // Mensagens legadas (negotiationId === null) pertencem à conversa geral do
+  // lead e nunca são escondidas — só somem ao filtrar por uma negociação.
+  const filteredMessages = useMemo(() => {
+    if (conversationFilter === ALL_MESSAGES) return messages
+    return messages.filter(m => m.negotiationId === conversationFilter)
+  }, [messages, conversationFilter])
+
+  // Rola para a mensagem mais recente ao abrir a aba de chat (o conteúdo é
+  // montado só quando a aba fica ativa) e ao trocar o filtro de conversa.
+  // NÃO depende da quantidade de mensagens para não puxar o scroll de volta
+  // ao fim quando mensagens antigas são carregadas via "Carregar mais".
   useEffect(() => {
     if (activeTab === 'chat') scrollToBottom()
-  }, [activeTab, messages.length])
+  }, [activeTab, conversationFilter])
+
+  // Após prepender mensagens antigas, reposiciona o scroll para manter a
+  // mesma mensagem visível (ancoragem pelo delta de altura).
+  useLayoutEffect(() => {
+    if (prependAnchorRef.current === null) return
+    const el = scrollRef.current
+    if (el) el.scrollTop = el.scrollHeight - prependAnchorRef.current
+    prependAnchorRef.current = null
+  }, [messages])
 
   const handleLoadMore = () => {
+    // Captura a altura atual antes do fetch para ancorar o scroll depois.
+    prependAnchorRef.current = scrollRef.current?.scrollHeight ?? 0
     setPage(prev => prev + 1)
   }
 
@@ -193,11 +249,46 @@ export const LeadSheet = ({
             </TabsContent>
 
             <TabsContent value="negociacoes" className="mt-4">
-              {lead.id && <NegotiationsTab leadId={lead.id} />}
+              {lead.id && (
+                <NegotiationsTab
+                  leadId={lead.id}
+                  negotiations={negotiations}
+                  setNegotiations={setNegotiations}
+                />
+              )}
             </TabsContent>
 
             <TabsContent value="chat" className="mt-4">
               <div className="flex h-[80vh] flex-col">
+                {negotiations.length > 0 && (
+                  <div className="mb-3 flex flex-col gap-1.5">
+                    <Label className="text-muted-foreground text-xs">
+                      Filtrar conversa
+                    </Label>
+                    <Select
+                      value={conversationFilter}
+                      onValueChange={setConversationFilter}
+                    >
+                      <SelectTrigger className="w-full" size="sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value={ALL_MESSAGES}>
+                          Conversa completa
+                        </SelectItem>
+                        {negotiations.map(negotiation => (
+                          <SelectItem
+                            key={negotiation.id}
+                            value={negotiation.id}
+                          >
+                            {negotiation.title ??
+                              `Negociação de ${format(new Date(negotiation.createdAt), 'dd/MM/yyyy')}`}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
                 {/* <div className="flex h-[60vh] flex-col"> */}
                 <div ref={scrollRef} className="flex-1 overflow-auto">
                   {page < totalPages && (
@@ -215,11 +306,31 @@ export const LeadSheet = ({
                     </div>
                   )}
                   <div className="flex flex-col gap-3 p-2">
-                    {messages.map(msg => (
-                      <div
-                        key={msg.id}
-                        className={`flex ${msg.sender === MessageSender.enum.LEAD ? 'justify-start' : 'justify-end'}`}
-                      >
+                    {filteredMessages.length === 0 && (
+                      <p className="text-muted-foreground py-6 text-center text-xs">
+                        Nenhuma mensagem nesta negociação.
+                      </p>
+                    )}
+                    {filteredMessages.map((msg, index) => {
+                      const prev = filteredMessages[index - 1]
+                      const showDayDivider =
+                        !prev ||
+                        !isSameDay(
+                          new Date(prev.createdAt),
+                          new Date(msg.createdAt),
+                        )
+                      return (
+                        <Fragment key={msg.id}>
+                          {showDayDivider && (
+                            <div className="my-1 flex justify-center">
+                              <span className="bg-muted text-muted-foreground rounded-full px-2 py-0.5 text-[10px] font-medium">
+                                {formatDayLabel(new Date(msg.createdAt))}
+                              </span>
+                            </div>
+                          )}
+                          <div
+                            className={`flex ${msg.sender === MessageSender.enum.LEAD ? 'justify-start' : 'justify-end'}`}
+                          >
                         <div
                           className={`flex max-w-[80%] flex-col rounded-lg px-3 py-2 text-sm ${
                             msg.sender === MessageSender.enum.LEAD
@@ -250,9 +361,11 @@ export const LeadSheet = ({
                           <p className="mt-1 text-right text-[10px] opacity-50">
                             {format(new Date(msg.createdAt), 'HH:mm')}
                           </p>
-                        </div>
-                      </div>
-                    ))}
+                            </div>
+                          </div>
+                        </Fragment>
+                      )
+                    })}
                   </div>
                 </div>
 

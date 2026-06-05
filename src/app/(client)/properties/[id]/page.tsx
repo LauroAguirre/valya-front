@@ -151,7 +151,7 @@ export default function ImovelDetailPage({
           className="flex flex-col gap-4"
         >
           <Tabs defaultValue="general" className="w-full">
-            <TabsList className="w-full justify-start">
+            <TabsList className="w-full justify-start overflow-x-auto">
               <TabsTrigger value="general">Cadastro Geral</TabsTrigger>
               <TabsTrigger value="financial" disabled={!property}>
                 Financeiro

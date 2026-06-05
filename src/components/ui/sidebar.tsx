@@ -262,19 +262,26 @@ function SidebarTrigger({
 
   return (
     <Button
-      data-sidebar="trigger"
-      data-slot="sidebar-trigger"
-      variant="ghost"
-      size="icon"
-      className={cn('size-7', className)}
+      // data-sidebar="trigger"
+      // data-slot="sidebar-trigger"
+      variant="link"
+      // size="icon"
+      className={cn(
+        'size-7',
+        'text-foreground w-fit px-3 text-base font-bold',
+        className,
+      )}
       onClick={event => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      <PanelLeftIcon />
-      <span className="sr-only">Toggle Sidebar</span>
+      <PanelLeftIcon />{' '}
+      {/* <span className="text-foreground text-base font-bold tracking-tight"> */}
+      Valya
+      {/* </span> */}
+      {/* <span className="sr-only">Toggle Sidebar</span> */}
     </Button>
   )
 }

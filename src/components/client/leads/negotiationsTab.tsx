@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { format } from 'date-fns'
 import { Building2, Plus } from 'lucide-react'
 import { toast } from 'sonner'
@@ -20,7 +20,6 @@ import { Spinner } from '@/components/ui/spinner'
 
 import { LeadStage } from '@/schemas/leadSchema'
 import { Negotiation, NegotiationStatus } from '@/schemas/negotiationSchema'
-import { loadLeadNegotiations } from '@/services/negotiation/loadLeadNegotiations'
 import { createNegotiation } from '@/services/negotiation/createNegotiation'
 import { moveNegotiationStage } from '@/services/negotiation/moveNegotiationStage'
 import { closeNegotiation } from '@/services/negotiation/closeNegotiation'
@@ -61,22 +60,21 @@ const STATUS_VARIANT: Record<
 
 interface NegotiationsTabProps {
   leadId: string
+  negotiations: Negotiation[]
+  setNegotiations: Dispatch<SetStateAction<Negotiation[]>>
 }
 
-export const NegotiationsTab = ({ leadId }: NegotiationsTabProps) => {
-  const [negotiations, setNegotiations] = useState<Negotiation[]>([])
+export const NegotiationsTab = ({
+  leadId,
+  negotiations,
+  setNegotiations,
+}: NegotiationsTabProps) => {
   const { promiseInProgress: loading } = usePromiseTracker({
     area: 'loadingLeadNegotiations',
   })
   const { promiseInProgress: creating } = usePromiseTracker({
     area: 'creatingNegotiation',
   })
-
-  useEffect(() => {
-    if (!leadId) return
-    setNegotiations([])
-    loadLeadNegotiations(leadId).then(setNegotiations)
-  }, [leadId])
 
   const activeNegotiation = negotiations.find(
     n => n.status === NegotiationStatus.OPEN,

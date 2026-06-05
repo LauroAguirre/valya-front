@@ -25,6 +25,9 @@ export type MessageChannel = z.infer<typeof MessageChannel>
 export const messageSchema = z.object({
   id: z.string().nullish(),
   leadId: z.string().nullish(),
+  // Negociação a que a mensagem pertence. A thread do WhatsApp continua única
+  // por lead; null em mensagens legadas sem atribuição de negociação.
+  negotiationId: z.string().nullish(),
   sender: MessageSender,
   content: z.string().nullish(),
   mediaUrl: z.string().nullish(),
