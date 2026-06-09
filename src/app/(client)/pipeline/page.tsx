@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Card } from '@/components/ui/card'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { Input } from '@/components/ui/input'
 
-import { Building2, Calendar } from 'lucide-react'
+import { Building2, Calendar, Search } from 'lucide-react'
 import { LeadSheet } from '@/components/client/leads/leadSheet'
 import { Lead, LeadStage } from '@/schemas/leadSchema'
 // import { Lead, LeadOrigin, LeadStage } from '@/schemas/leadSchema'
@@ -26,6 +26,7 @@ export default function EsteiraPage() {
   const ctxUser = useUserProvider()
   const [selectedLead, setSelectedLead] = useState<Lead>()
   const [sheetOpen, setSheetOpen] = useState(false)
+  const [search, setSearch] = useState('')
   const [activeLeads, setActiveLeads] = useState<Lead[]>([
     // {
     //   id: 'l1',
@@ -60,7 +61,17 @@ export default function EsteiraPage() {
     // Cada card do funil é uma NEGOCIAÇÃO ativa de um lead. A etapa vive em
     // lead.activeNegotiation.stage. Leads sem negociação aberta não aparecem
     // aqui (só na lista de contatos).
-    const negotiatingLeads = activeLeads.filter(l => !!l.activeNegotiation)
+    const term = search.trim().toLowerCase()
+    const negotiatingLeads = activeLeads
+      .filter(l => !!l.activeNegotiation)
+      .filter(l => !term || l.name?.toLowerCase().includes(term))
+      // Ordena pela última resposta, da mais recente para a mais antiga.
+      // Leads sem lastReplyAt vão para o fim da lista.
+      .sort((a, b) => {
+        const aTime = a.lastReplyAt ? new Date(a.lastReplyAt).getTime() : 0
+        const bTime = b.lastReplyAt ? new Date(b.lastReplyAt).getTime() : 0
+        return bTime - aTime
+      })
     const byStage = (stage: LeadStage) =>
       negotiatingLeads.filter(l => l.activeNegotiation?.stage === stage)
 
@@ -108,7 +119,7 @@ export default function EsteiraPage() {
     ]
 
     return columns
-  }, [activeLeads])
+  }, [activeLeads, search])
 
   function openLead(lead: Lead) {
     setSelectedLead(lead)
@@ -128,8 +139,8 @@ export default function EsteiraPage() {
   }, [ctxUser.currentUser])
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
+    <div className="flex h-full flex-col gap-6">
+      <div className="shrink-0">
         <h1 className="text-foreground text-2xl font-bold">
           Esteira de Vendas
         </h1>
@@ -138,11 +149,29 @@ export default function EsteiraPage() {
         </p>
       </div>
 
-      <ScrollArea className="w-full">
-        <div className="flex gap-4 pb-4" style={{ minWidth: '1200px' }}>
+      <div className="relative shrink-0">
+        <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+        <Input
+          type="text"
+          placeholder="Procurar lead..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="pl-9"
+        />
+      </div>
+
+      {/* Board: rola horizontalmente quando não cabem todas as etapas; o scroll
+          vertical fica dentro de cada coluna (overflow-y-auto abaixo), não na
+          tela toda. overflow-y-hidden aqui evita que o eixo vertical "vaze"
+          para o container do board (efeito colateral do overflow-x). */}
+      <div className="min-h-0 flex-1 overflow-x-auto overflow-y-hidden pb-4">
+        <div className="flex h-full gap-4" style={{ minWidth: '1200px' }}>
           {kanbanColumns.map(column => (
-            <div key={column.id} className="flex w-52 shrink-0 flex-col gap-3">
-              <div className="flex items-center justify-between rounded-lg bg-slate-300 px-3 py-2">
+            <div
+              key={column.id}
+              className="flex h-full w-52 shrink-0 flex-col gap-3"
+            >
+              <div className="flex shrink-0 items-center justify-between rounded-lg bg-slate-300 px-3 py-2">
                 <div className="flex items-center gap-2">
                   <div className={`h-2.5 w-2.5 rounded-full ${column.color}`} />
                   <h3 className="text-foreground text-xs font-medium">
@@ -154,7 +183,7 @@ export default function EsteiraPage() {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-1">
                 {column.cards.map(lead => (
                   <Card
                     key={lead.id}
@@ -188,16 +217,16 @@ export default function EsteiraPage() {
             </div>
           ))}
         </div>
-        {loadingActiveLeads && (
-          <div className="flex w-full flex-1 shrink-0 items-center justify-center gap-3">
-            <div className="flex items-center px-2">
-              <Spinner className="size-4" />
-            </div>
-            <span>Atualizando lista de leads...</span>
+      </div>
+
+      {loadingActiveLeads && (
+        <div className="flex shrink-0 items-center justify-center gap-3">
+          <div className="flex items-center px-2">
+            <Spinner className="size-4" />
           </div>
-        )}
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+          <span>Atualizando lista de leads...</span>
+        </div>
+      )}
       <LeadSheet
         lead={selectedLead}
         sheetOpen={sheetOpen}

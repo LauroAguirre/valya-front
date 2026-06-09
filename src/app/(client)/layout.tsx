@@ -17,7 +17,7 @@ export default function ClientLayout({
   children: React.ReactNode
 }) {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="h-svh">
       <ClientSidebar />
       <SidebarInset>
         <SubscriptionBanner hasCard={mockSubscription.hasCard} />
