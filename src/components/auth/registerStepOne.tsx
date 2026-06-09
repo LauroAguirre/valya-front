@@ -200,7 +200,7 @@ export function RegisterStepOne({ onAdvance }: RegisterStepOneProps) {
           name="cnpj"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>CNPJ (opcional)</FormLabel>
+              <FormLabel>CNPJ</FormLabel>
               <FormControl>
                 <InputMask mask={'00.000.000/0000-00'} {...field} />
               </FormControl>

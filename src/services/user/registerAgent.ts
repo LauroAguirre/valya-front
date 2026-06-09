@@ -2,7 +2,6 @@ import { trackPromise } from 'react-promise-tracker'
 import { AxiosError } from 'axios'
 import api from '../api/backendApi'
 import { AgentRegisterForm } from '@/schemas/agentRegisterSchema'
-import { User } from '@/schemas/userSchema'
 
 export type FieldError = { field: string; message: string }
 
@@ -14,11 +13,15 @@ type RegisterErrorBody = {
 }
 
 export type RegisterAgentResult =
-  | { success: true; token: string; user: User }
+  | { success: true; token: string }
   | { success: false; message?: string; details?: FieldError[] }
 
-// Etapa 1 — pré-cadastro público do corretor.
-// Em caso de sucesso (201) devolve o token JWT que autoriza a etapa 2 (ativação).
+// Etapa 1 — validação pública dos dados do corretor.
+// Nenhum usuário é criado aqui: o backend apenas valida os dados, guarda-os
+// num storage temporário e devolve um token de escopo de registro (curta
+// duração) que autoriza a etapa 2. A conta só é criada de forma atômica
+// quando a assinatura é confirmada na ativação — assim não existe conta órfã
+// capaz de fazer login sem assinatura.
 export async function registerAgent(
   fields: AgentRegisterForm,
 ): Promise<RegisterAgentResult> {
@@ -40,7 +43,6 @@ export async function registerAgent(
     return {
       success: true,
       token: response.data.token,
-      user: response.data.user,
     }
   } catch (error) {
     const axiosError = error as AxiosError<RegisterErrorBody>

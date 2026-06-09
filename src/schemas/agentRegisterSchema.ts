@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { cnpj } from 'cpf-cnpj-validator'
 
 // Etapa 1 do cadastro do corretor: dados + criação de senha + aceite dos termos.
 // Espelha as regras de validação da rota pública POST /api/users/agent/register.
@@ -22,7 +23,12 @@ export const agentRegisterSchema = z
       .min(1, 'CRECI é obrigatório.')
       .regex(/^\d+$/, 'O CRECI deve conter apenas números.'),
     uf: z.string().min(1, 'UF é obrigatória.'),
-    cnpj: z.string().optional(),
+    cnpj: z
+      .string()
+      .min(1, 'CNPJ é obrigatório.')
+      .refine(val => cnpj.isValid(val.replace(/\D/g, '')), {
+        message: 'CNPJ inválido.',
+      }),
     acceptTerms: z.boolean().refine(val => val === true, {
       message: 'É necessário aceitar os termos de uso e políticas.',
     }),

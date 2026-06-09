@@ -20,11 +20,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { propertyAdLinkSchema } from '@/schemas/propertyAdLinkSchema'
+import { propertyUnitSchema } from '@/schemas/propertyUnitSchema'
 
 import { PropertyGeneralTab } from '@/components/client/property/generalTab'
 import { saveProperty } from '@/services/properties/saveProperty'
 import { useUserProvider } from '@/providers/userProvider'
-import { PropertyFinancialTab } from '@/components/client/property/financialTab'
+import { PropertyDetailslTab } from '@/components/client/property/detailsTab'
 import { PropertyAdsTab } from '@/components/client/property/adsTab'
 import { PropertyImagesTab } from '@/components/client/property/imagesTab'
 import z from 'zod'
@@ -33,6 +34,7 @@ const formSchema = propertySchema
   .extend({
     images: propertyImageSchema.array().optional(),
     adLinks: propertyAdLinkSchema.array().optional(),
+    units: propertyUnitSchema.array().optional(),
   })
   .refine(schema => schema.name && schema.name.length > 1, {
     message: 'Informe o nome do imóvel/empreendimento',
@@ -82,6 +84,7 @@ export default function ImovelDetailPage({
       paymentOptions: '',
       images: [],
       adLinks: [],
+      units: [],
     },
   })
 
@@ -105,6 +108,7 @@ export default function ImovelDetailPage({
             bbqType: details.bbqType ?? BbqType.NONE,
             images: details.images ?? [],
             adLinks: details.adLinks ?? [],
+            units: details.units ?? [],
             // createdAt: new Date(details.createdAt),
             // updatedAt: details.updatedAt
             //   ? new Date(details.updatedAt)
@@ -160,7 +164,7 @@ export default function ImovelDetailPage({
             <TabsList className="w-full justify-start overflow-x-auto">
               <TabsTrigger value="general">Cadastro Geral</TabsTrigger>
               <TabsTrigger value="financial" disabled={!property}>
-                Financeiro
+                Detalhes
               </TabsTrigger>
               <TabsTrigger value="ads" disabled={!property}>
                 Anúncios
@@ -177,7 +181,7 @@ export default function ImovelDetailPage({
 
             {/* ---- ABA FINANCEIRO ---- */}
             <TabsContent value="financial" className="mt-6">
-              <PropertyFinancialTab form={form} property={property} />
+              <PropertyDetailslTab form={form} property={property} />
             </TabsContent>
 
             {/* ---- ABA ANUNCIOS ---- */}

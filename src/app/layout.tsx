@@ -39,7 +39,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${rubik.variable} bg-background`}>
       <UserProvider>
         <body className="font-sans antialiased">
-          <Toaster richColors expand={false} />
+          <Toaster richColors expand={true} />
           {children}
           {/* {process.env.NODE_ENV === 'production' && <Analytics />} */}
         </body>
