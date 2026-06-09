@@ -13,13 +13,49 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Loader2, RefreshCw, Trash2, Upload } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from 'sonner'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { uploadPropertyImage } from '@/services/properties/uploadPropertyImage'
 
 interface PropertyImagesTabProps {
   form: UseFormReturn<PropertyFields>
+}
+
+const THUMB_SIZES = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+
+/**
+ * Miniatura que mostra um efeito de loading (skeleton) enquanto a imagem
+ * é carregada da rede, dando feedback claro ao usuário.
+ */
+function ImageThumb({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false)
+
+  // Reseta o estado de loading caso a fonte da imagem mude.
+  useEffect(() => {
+    setLoaded(false)
+  }, [src])
+
+  return (
+    <>
+      {!loaded && (
+        <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={THUMB_SIZES}
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        className={cn(
+          'object-cover transition-opacity duration-300',
+          loaded ? 'opacity-100' : 'opacity-0',
+        )}
+      />
+    </>
+  )
 }
 
 interface PendingUpload {
@@ -36,13 +72,29 @@ export const PropertyImagesTab = ({ form }: PropertyImagesTabProps) => {
   const [isDragging, setIsDragging] = useState(false)
   const [pendingUploads, setPendingUploads] = useState<PendingUpload[]>([])
 
+  // Previews locais (blob) das imagens recém-enviadas, usados como fallback
+  // de exibição enquanto o backend ainda não devolve a `url` definitiva.
+  const localPreviewsRef = useRef<Record<string, string>>({})
+
   const propertyId = form.getValues('id')
 
   const {
     fields: imageFields,
     append: appendImage,
     remove: removeImage,
-  } = useFieldArray({ control: form.control, name: 'images' })
+  } = useFieldArray({
+    control: form.control,
+    name: 'images',
+    keyName: 'fieldId',
+  })
+
+  // Revoga todos os blobs de preview ao desmontar para evitar vazamento.
+  useEffect(() => {
+    const previews = localPreviewsRef.current
+    return () => {
+      Object.values(previews).forEach(url => URL.revokeObjectURL(url))
+    }
+  }, [])
 
   async function uploadFile(pending: PendingUpload) {
     if (!propertyId) return
@@ -50,13 +102,21 @@ export const PropertyImagesTab = ({ form }: PropertyImagesTabProps) => {
     const uploaded = await uploadPropertyImage(propertyId, pending.file)
 
     if (uploaded) {
+      // Se o backend não retornou a `url` na resposta do upload, mantemos o
+      // preview local como fallback (indexado pela id da imagem criada) para
+      // não exibir um quadro vazio. Caso a `url` venha, descartamos o blob.
+      if (!uploaded.url && uploaded.id) {
+        localPreviewsRef.current[uploaded.id] = pending.previewUrl
+      } else {
+        URL.revokeObjectURL(pending.previewUrl)
+      }
+
       appendImage({
         ...uploaded,
         description: uploaded.description ?? '',
         // createdAt: uploaded.createdAt ?? new Date(),
       })
       setPendingUploads(prev => prev.filter(p => p.id !== pending.id))
-      URL.revokeObjectURL(pending.previewUrl)
     } else {
       setPendingUploads(prev =>
         prev.map(p => (p.id === pending.id ? { ...p, status: 'error' } : p)),
@@ -224,52 +284,57 @@ export const PropertyImagesTab = ({ form }: PropertyImagesTabProps) => {
                 </div>
               </div>
             ))}
-            {imageFields.map((img, index) => (
-              <div
-                key={img.id}
-                className="border-border overflow-hidden rounded-lg border"
-              >
-                <div className="bg-secondary relative flex h-36 items-center justify-center overflow-hidden">
-                  {img.url && (
-                    <Image
-                      src={img.url}
-                      alt={img.description ?? ''}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                  )}
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="icon"
-                    className="bg-card text-muted-foreground absolute top-1 right-1 h-7 w-7 hover:text-white"
-                    onClick={() => removeImage(index)}
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </Button>
-                </div>
-                <div className="p-3">
-                  <FormField
-                    control={form.control}
-                    name={`images.${index}.description`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            value={field.value ?? ''}
-                            placeholder="Detalhes sobre a imagem"
-                            className="h-8 text-xs"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
+            {imageFields.map((img, index) => {
+              const thumbSrc =
+                img.url || (img.id ? localPreviewsRef.current[img.id] : '')
+
+              return (
+                <div
+                  key={img.fieldId}
+                  className="border-border overflow-hidden rounded-lg border"
+                >
+                  <div className="bg-secondary relative flex h-36 items-center justify-center overflow-hidden">
+                    {thumbSrc && (
+                      <ImageThumb src={thumbSrc} alt={img.description ?? ''} />
                     )}
-                  />
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="icon"
+                      className="bg-card text-muted-foreground absolute top-1 right-1 h-7 w-7 hover:text-white"
+                      onClick={() => {
+                        if (img.id && localPreviewsRef.current[img.id]) {
+                          URL.revokeObjectURL(localPreviewsRef.current[img.id])
+                          delete localPreviewsRef.current[img.id]
+                        }
+                        removeImage(index)
+                      }}
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                  <div className="p-3">
+                    <FormField
+                      control={form.control}
+                      name={`images.${index}.description`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              value={field.value ?? ''}
+                              placeholder="Detalhes sobre a imagem"
+                              className="h-8 text-xs"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </CardContent>
