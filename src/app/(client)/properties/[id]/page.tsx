@@ -119,6 +119,12 @@ export default function ImovelDetailPage({
     fields.userId = ctxUser.currentUser?.id
     const newProperty = await saveProperty(fields)
     if (newProperty?.id) {
+      setProperty(newProperty)
+      form.reset({
+        ...fields,
+        id: newProperty.id,
+        userId: newProperty.userId,
+      })
       toast.success('Cadastro realizado com sucesso.')
     } else {
       toast.error(
